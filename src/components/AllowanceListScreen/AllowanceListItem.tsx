@@ -1,19 +1,27 @@
 import * as React from "react";
 import { View, Text, ListItem, Left, Right, Icon,  } from "native-base";
 import { StyleSheet, Alert } from "react-native";
+import { NavigationScreenProp } from "react-navigation";
 
 interface Props {
-  date: string;
-  isDone: boolean;
+  allowance: {
+    date: string,
+    isDone: boolean,
+  }
+  navigation: NavigationScreenProp<any, any>
 }
 export default class AllowanceListItem extends React.Component<Props> {
   render() {
-    const { date, isDone } = this.props;
+    const { navigation } = this.props;
+    const { date, isDone } = this.props.allowance;
     const color = isDone ? "green" : "gray";
 
     return(
       <ListItem
-        onPress={() => Alert.alert("pushed", `date is ${date}`)}
+        onPress={() => 
+          navigation.navigate("Recipients", {
+            date: date,
+          })}
       >
         <Left>
           <Text>{date}</Text>

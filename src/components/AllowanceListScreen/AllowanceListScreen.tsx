@@ -16,11 +16,16 @@ interface Props {
 }
 export default class AllowanceListScreen extends React.Component<Props> {
 
+  static navigationOptions = {
+    title: "AllowanceListScreen"
+
+  }
+
   render() {
     return(
       <Container>
-        <Content padder>
-          <AllowanceList />
+        <Content>
+          <AllowanceList navigation={this.props.navigation} />
         </Content>
       </Container>
     )

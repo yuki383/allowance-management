@@ -1,4 +1,1 @@
-export interface allowanseProperty {
-  date: string,
-  isDone: boolean
-};
+export interface hoge {hoge: string}

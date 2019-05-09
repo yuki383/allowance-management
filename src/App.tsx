@@ -10,21 +10,50 @@
 
 import * as React from "react";
 import { createAppContainer, createStackNavigator } from "react-navigation";
+import { Provider } from "react-redux";
+import { store } from "./configureStore";
 
 import AllowanceListScreen from "./components/AllowanceListScreen/AllowanceListScreen";
+import AllowancePropertyScreen from "./components/AllowancePropertyScreen/AllowancePropertyScreen";
+import RecipientsScreen from "./components/RecipientsScreen/RecipientsScreen";
 
-const AppNavigator = createStackNavigator({
-  AllowanceList: {
-    screen: AllowanceListScreen,
+const MainStack = createStackNavigator(
+  {
+    AllowanceList: {
+      screen: AllowanceListScreen,
+    },
+    Recipients: {
+      screen: RecipientsScreen,
+    }
   },
-})
+  {
+    mode: "card"
+  }
+);
 
-const AppContainer = createAppContainer(AppNavigator);
+const RootStack = createStackNavigator(
+  {
+    Main: {
+      screen: MainStack,
+    },
+    AllowancePropertyModal: {
+      screen: AllowancePropertyScreen,
+    }
+  },
+  {
+    mode: "modal",
+    headerMode: "none"
+  }
+)
+
+const AppContainer = createAppContainer(RootStack);
 
 export default class App extends React.Component {
   render() {
     return (
+      <Provider store={store} >
         <AppContainer />
+      </Provider>
     );
   }
 }

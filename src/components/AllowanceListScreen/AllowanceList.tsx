@@ -1,5 +1,6 @@
 import * as React from "react";
 import { View, Text, List, ListItem, } from "native-base";
+import { NavigationScreenProp } from "react-navigation";
 
 import AllowanceListItem from "./AllowanceListItem";
 
@@ -20,13 +21,13 @@ const arr = [
 ]
 
 interface Props {
-
+  navigation: NavigationScreenProp<any, any> 
 }
 
 export default class AllowanceList extends React.Component<Props> {
   render() {
-    const items = arr.map(obj => {
-      return <AllowanceListItem key={obj.date} date={obj.date} isDone={obj.isDone} />
+    const items = arr.map(property => {
+      return <AllowanceListItem key={property.date} allowance={property} navigation={this.props.navigation} />
     })
 
     return (
