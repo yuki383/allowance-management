@@ -3,19 +3,37 @@ import {
   NavigationScreenOptions
 } from "react-navigation";
 
+/**
+ * コンポーネントのNavigationOptionsの型
+ * static NavigationOptions: NavigationOptions = ({ ... }) => ({...})
+ */
 export type NavigationOptions = NavigationScreenConfig<NavigationScreenOptions>;
 
-export interface Recipients {
+export interface ActionType<T> {
+  type: string;
+  payload: T;
+}
+
+export interface User {
+  name: string;
+}
+
+/**
+ * 
+ */
+export interface MonthLists {
   date: string;
   isDone: boolean;
-  recopients: Recipient[];
 }
 
-export interface Recipient {
-  name: string;
-  allowances: Allowance[];
+export interface RecipientsList {
+  [date: string]: [
+    {
+      user: User;
+      allowances: Allowance[];
+    }
+  ]
 }
-
 
 export interface Allowance {
   id: number;

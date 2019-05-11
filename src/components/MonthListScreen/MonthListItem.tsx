@@ -2,18 +2,17 @@ import * as React from "react";
 import { View, Text, ListItem, Left, Right, Icon,  } from "native-base";
 import { StyleSheet, Alert } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
+import { Allowance, RecipientsList, MonthLists } from "../../constants/types";
+import Recipients from "../RecipientsScreen/Recipients";
 
 interface Props {
-  allowance: {
-    date: string,
-    isDone: boolean,
-  }
+  monthList: MonthLists;
   navigation: NavigationScreenProp<any, any>
 }
-export default class AllowanceListItem extends React.Component<Props> {
+export default class MonthListItem extends React.Component<Props> {
   render() {
-    const { navigation } = this.props;
-    const { date, isDone } = this.props.allowance;
+    const { navigation, monthList } = this.props;
+    const { date, isDone } = monthList;
     const color = isDone ? "green" : "gray";
 
     return(

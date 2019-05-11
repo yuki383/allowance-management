@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import { allowancePropertyReducer } from "./allowancePropertyReducer";
+import { MonthListReducer } from "./MonthListReducer";
 
 export default combineReducers({
-  allowance: allowancePropertyReducer,
+  monthList: MonthListReducer,
 });

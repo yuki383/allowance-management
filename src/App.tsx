@@ -13,14 +13,14 @@ import { createAppContainer, createStackNavigator } from "react-navigation";
 import { Provider } from "react-redux";
 import { store } from "./configureStore";
 
-import AllowanceListScreen from "./components/AllowanceListScreen/AllowanceListScreen";
+import MonthListScreen from "./components/MonthListScreen/MonthListScreen";
 import AllowancePropertyScreen from "./components/AllowancePropertyScreen/AllowancePropertyScreen";
 import RecipientsScreen from "./components/RecipientsScreen/RecipientsScreen";
 
 const MainStack = createStackNavigator(
   {
     AllowanceList: {
-      screen: AllowanceListScreen,
+      screen: MonthListScreen,
     },
     Recipients: {
       screen: RecipientsScreen,
