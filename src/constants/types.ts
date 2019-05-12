@@ -18,20 +18,12 @@ export interface User {
   name: string;
 }
 
-/**
- * 
- */
-export interface MonthLists {
-  date: string;
-  isDone: boolean;
-}
-
 export interface RecipientsList {
   [date: string]: [
     {
       user: User;
       allowances: Allowance[];
-    }
+    }[]
   ]
 }
 
