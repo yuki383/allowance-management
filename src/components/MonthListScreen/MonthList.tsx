@@ -4,16 +4,19 @@ import { NavigationScreenProp } from "react-navigation";
 
 import MonthListItem from "./MonthListItem";
 import { connect } from "react-redux";
+import { Month } from "../../constants/types";
 
 interface Props {
   navigation: NavigationScreenProp<any, any> 
-  monthLists: string[];
+  monthList: Month;
+  ids: number[];
 }
 
 class MonthList extends React.Component<Props> {
   render() {
-    const items = this.props.monthLists.map(date => {
-      return <MonthListItem key={date} month={date} navigation={this.props.navigation} />
+    const items = this.props.ids.map(id => {
+      console.log(this.props.monthList[id])
+      return <MonthListItem key={id} month={this.props.monthList[id].date} navigation={this.props.navigation} />
     });
     return (
       <List>

@@ -10,7 +10,7 @@ import {
 import { NavigationScreenProp } from "react-navigation";
 
 import MonthList from "./MonthList";
-import { NavigationOptions, } from "../../constants/types";
+import { NavigationOptions, Month, } from "../../constants/types";
 import { connect } from "react-redux";
 import { createMonthList } from "../../actions/MonthListActions";
 
@@ -22,8 +22,9 @@ const styles = StyleSheet.create({
 
 interface Props {
   navigation: NavigationScreenProp<any, any>;
-  monthLists: string[];
-  createMonthList: ({ date }) => void;
+  monthList: Month;
+  ids: number[];
+  createMonthList: ({ date: string, allowance: number }) => void;
 }
 
 class AllowanceListScreen extends React.Component<Props> {
@@ -56,13 +57,13 @@ class AllowanceListScreen extends React.Component<Props> {
   }
 
   _createMonthItem = () => {
-    const { monthLists: monthList, createMonthList } = this.props;
+    const { createMonthList, monthList, ids } = this.props;
     const nextMonth = this._getMonth(1);
-    if (monthList.length === 0) {
-      createMonthList({ date: this._getMonth(0) });
+    if (ids.length === 0) {
+      createMonthList({ date: this._getMonth(0), allowance: 0 });
     }
-    if (!monthList.some(date => date === nextMonth)) {
-      createMonthList({ date: nextMonth });
+    if (!ids.some(id => monthList[id].date === nextMonth)) {
+      createMonthList({ date: nextMonth, allowance: 0 });
     }
   }
 

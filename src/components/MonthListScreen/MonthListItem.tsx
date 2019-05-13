@@ -2,12 +2,11 @@ import * as React from "react";
 import { View, Text, ListItem, Left, Right, Icon,  } from "native-base";
 import { StyleSheet, Alert } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
-import { Allowance, RecipientsList,} from "../../constants/types";
+import { Allowance } from "../../constants/types";
 import { connect } from "react-redux";
 
 interface Props {
   month: string;
-  recipientsList: RecipientsList;
   navigation: NavigationScreenProp<any, any>
 }
 class MonthListItem extends React.Component<Props> {

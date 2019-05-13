@@ -25,10 +25,12 @@ export interface User {
 }
 
 export interface Month {
-  [date: string]: {
+  [id: number]: {
+    id: number;
+    date: string;
     allowances: number[];
   }
-}
+  }
 
 
 export interface Allowances {

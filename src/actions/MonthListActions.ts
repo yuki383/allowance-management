@@ -6,5 +6,6 @@ export const deleteMonthList = createAction("monthList/delete");
 export const addMonthAllowance = createAction("monthAllowance/allowance");
 
 export interface Payload {
+  id: number;
   date: string;
 }

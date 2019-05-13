@@ -43,51 +43,15 @@ export const DefaultStatusReducer = createReducer(initialState, {
   },
 
   [updateDefaultAllowance.type]: (state: State, action: Action) => {
-    
+    const { id } = action.payload.property;
+    state.allowances[id] = action.payload.property;
+  },
+
+  [deleteDefaultAllowance.type]: (state: State, action: Action) => {
+    const { id } = action.payload.property;
+    const { allowances, Ids } = state;
+    const index = Ids.indexOf(id);
+    delete allowances[id];
+    Ids.splice(index, 1);
   }
 })
-
-/**
- *  addDefaultRecipientのReducer 
- * @param state 現在のstate
- * @param action 送られてきたAction
- */
-const addRecipient = (state: State, action: RecipientsAction): State => ({
-  recipients: [
-    ...state.recipients,
-    {
-      user: action.payload.user,
-      allowances: []
-    }
-  ]
-});
-
-/**
- *  updateDefaultRecipientのReducer 
- * @param state 現在のState
- * @param action 送られてきたAction
- */
-const updateRecipient = (state: State, action: RecipientsAction): State => {
-  const newRecipients: Recipients[] = state.recipients.map(recipient => {
-    const { id, name } = action.payload.user;
-    if (recipient.user.id === id) {
-      return {
-        ...recipient,
-        user: {
-          ...recipient.user,
-          name: name,
-        }
-      }
-    }
-    return recipient;
-  });
-  return {
-    recipients: newRecipients
-  }
-}
-
-const deleteRecipient = (state: State, acrion: RecipientsAction) => {
-  const { user } = acrion.payload
-  const newRecipients = state.recipients.filter(recipient => recipient.user.id !== user.id);
-  return newRecipients;
-}
