@@ -14,7 +14,7 @@ interface Props {
 export default class AllwanceProertyScreen extends React.Component<Props> {
 
   static navigationOptions: NavigationOptions = ({ navigation }) => ({
-    title: navigation.getParam("date")
+    title: navigation.getParam("title")
   })
 
   render() {

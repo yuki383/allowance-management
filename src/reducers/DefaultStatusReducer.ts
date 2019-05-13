@@ -4,12 +4,13 @@ import {
   addDefaultAllowance,
   updateDefaultAllowance,
   deleteDefaultAllowance,
+  Payload,
 } from "../actions/DefaultActions";
-import { identifier } from "@babel/types";
+import { isDebuggerStatement } from "@babel/types";
 
 interface State {
   allowances: {
-    [id: number]: Default;
+    [id: number]: Payload;
   }
   Ids: number[];
 }
@@ -19,36 +20,32 @@ const initialState: State = {
   Ids: []
 }
 
-interface Default {
-  id: number;
-  title: string;
-  amount: number;
-  memo: string;
-}
-
-type Action = ActionType<{property: Default}>
+type Action = ActionType<Payload>
 
 export const DefaultStatusReducer = createReducer(initialState, {
 
   [addDefaultAllowance.type]: (state: State, action: Action) => {
-    const { title, amount, memo } = action.payload.property;
+    console.log(action)
+    const { userId, title, amount, memo } = action.payload;
     const id = state.Ids.length;
-    const newAllowance: Default = {
+    const newAllowance: Payload = {
       id,
+      userId,
       title,
       amount,
       memo
     };
     state.allowances[id] = newAllowance;
+    state.Ids.push(id);
   },
 
   [updateDefaultAllowance.type]: (state: State, action: Action) => {
-    const { id } = action.payload.property;
-    state.allowances[id] = action.payload.property;
+    const { id } = action.payload;
+    state.allowances[id] = action.payload;
   },
 
   [deleteDefaultAllowance.type]: (state: State, action: Action) => {
-    const { id } = action.payload.property;
+    const { id } = action.payload;
     const { allowances, Ids } = state;
     const index = Ids.indexOf(id);
     delete allowances[id];

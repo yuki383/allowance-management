@@ -34,9 +34,9 @@ class AllowanceListScreen extends React.Component<Props> {
     headerRight: (
       <Icon 
         type="AntDesign"
-        name="plus"
+        name="setting"
         style={styles.headerIcon}
-        onPress={() => navigation.getParam("createMonthList")()}
+        onPress={() => navigation.navigate("Defaults", { title: "Defaults"})}
         />
     )
   })

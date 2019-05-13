@@ -14,30 +14,35 @@ const arr = {
     allowances: [
       {
         id: 1,
+        userId: 1,
         isDone: false,
         title: "monthly allowance",
-        amount: 3000,
+        amount: "3000",
         memo: "monthly allowance of highscool student in my family."
       },
       {
         id: 2,
+        userId: 1,
+
         isDone: false,
         title: "hoge",
-        amount: 40000,
+        amount: "40000",
         memo: "aaaaaa"
       },
       {
         id: 3,
+        userId: 1,
         isDone: true,
         title: "hoge",
-        amount: 40000,
+        amount: "40000",
         memo: "aaaaaa"
       },
       {
         id: 4,
+        userId: 1,
         isDone: false,
         title: "hoge",
-        amount: 40000,
+        amount: "3058",
         memo: "aaaaaa"
       },
     ]

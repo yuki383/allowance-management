@@ -39,8 +39,9 @@ export interface Allowances {
 
 export interface Allowance {
   id: number;
+  userId: number;
   isDone: boolean;
   title: string;
-  amount: number;
+  amount: string;
   memo: string;
 }

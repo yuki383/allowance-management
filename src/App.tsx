@@ -16,6 +16,22 @@ import { store } from "./configureStore";
 import MonthListScreen from "./components/MonthListScreen/MonthListScreen";
 import AllowancePropertyScreen from "./components/AllowancePropertyScreen/AllowancePropertyScreen";
 import RecipientsScreen from "./components/RecipientsScreen/RecipientsScreen";
+import { Text } from "react-native";
+import DefaultAllowance from "./components/DefaultAllowance/DefaultAllowance";
+import DefaultAllowanceForm from "./components/DefaultAllowance/DefaultAllowanceForm";
+
+const DefaultAllowanceStack = createStackNavigator({
+  DefaultsScreen: {
+    screen: DefaultAllowance,
+  },
+  DefaultAllowanceForm: {
+    screen: DefaultAllowanceForm
+  }
+},
+{
+  mode: "modal",
+})
+
 
 const MainStack = createStackNavigator(
   {
@@ -24,10 +40,13 @@ const MainStack = createStackNavigator(
     },
     Recipients: {
       screen: RecipientsScreen,
+    },
+    Defaults: {
+      screen: DefaultAllowance,
     }
   },
   {
-    mode: "card"
+    mode: "card",
   }
 );
 
@@ -38,6 +57,9 @@ const RootStack = createStackNavigator(
     },
     AllowancePropertyModal: {
       screen: AllowancePropertyScreen,
+    },
+    DefaultAllowanceForm: {
+      screen: DefaultAllowanceForm,
     }
   },
   {

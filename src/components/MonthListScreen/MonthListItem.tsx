@@ -17,7 +17,7 @@ class MonthListItem extends React.Component<Props> {
       <ListItem
         onPress={() => 
           navigation.navigate("Recipients", {
-            date: month,
+            title: month,
           })}
       >
         <Left>
