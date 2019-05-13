@@ -15,16 +15,24 @@ export interface ActionType<T> {
 }
 
 export interface User {
-  name: string;
+  ByIds: {
+    [id: number]: {
+      id: number;
+      name: string;
+    }
+  },
+  Ids: number;
 }
 
-export interface RecipientsList {
-  [date: string]: [
-    {
-      user: User;
-      allowances: Allowance[];
-    }[]
-  ]
+export interface Month {
+  [date: string]: {
+    allowances: number[];
+  }
+}
+
+
+export interface Allowances {
+  [id: number]: Allowance;
 }
 
 export interface Allowance {

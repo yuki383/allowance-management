@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { MonthListReducer } from "./MonthListReducer";
+import { MonthListReducer } from "./MonthReducer";
 
 export default combineReducers({
   monthList: MonthListReducer,

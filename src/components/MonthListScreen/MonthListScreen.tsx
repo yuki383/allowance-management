@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 interface Props {
   navigation: NavigationScreenProp<any, any>;
   monthLists: string[];
-  createMonthList: (date: string) => void;
+  createMonthList: ({ date }) => void;
 }
 
 class AllowanceListScreen extends React.Component<Props> {
@@ -59,10 +59,10 @@ class AllowanceListScreen extends React.Component<Props> {
     const { monthLists: monthList, createMonthList } = this.props;
     const nextMonth = this._getMonth(1);
     if (monthList.length === 0) {
-      createMonthList(this._getMonth(0));
+      createMonthList({ date: this._getMonth(0) });
     }
     if (!monthList.some(date => date === nextMonth)) {
-      createMonthList(nextMonth)
+      createMonthList({ date: nextMonth });
     }
   }
 
