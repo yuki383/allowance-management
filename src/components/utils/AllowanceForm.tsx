@@ -3,6 +3,7 @@ import { Container, Content, Form, Item, Header, Text, Input, Picker, Icon, Butt
 import { connect } from "react-redux";
 import { addDefaultAllowance, updateDefaultAllowance, deleteDefaultAllowance, Payload } from "../../actions/DefaultActions";
 import { NavigationScreenProp } from "react-navigation";
+import ModalHeader from "./ModalHeader";
 
 interface Props {
   addDefaultAllowance: (defaults: Payload) => void;
@@ -36,17 +37,7 @@ class DefaultAllowanceForm extends React.Component<Props, State> {
   render() {
     return(
       <Container>
-        <Header>
-          <Left>
-            <Icon type="AntDesign" name="down"
-              onPress={() => this.props.navigation.goBack()}
-            />
-          </Left>
-          <Body style={{ alignItems: "center" }}>
-            <Title>DefaultAllowanceForm</Title>
-          </Body>
-          <Right></Right>
-        </Header>
+        <ModalHeader title="allowance" navigation={this.props.navigation} />
         <Content>
           <Form>
             <Item picker stackedLabel >
