@@ -1,12 +1,14 @@
 import * as React from "react";
-import { Container, Content, Form, Item, Header, Text, Input, Picker, Icon, Button } from "native-base";
+import { Container, Content, Form, Item, Header, Text, Input, Picker, Icon, Button, Label, Left, Body, Right, Title } from "native-base";
 import { connect } from "react-redux";
 import { addDefaultAllowance, updateDefaultAllowance, deleteDefaultAllowance, Payload } from "../../actions/DefaultActions";
+import { NavigationScreenProp } from "react-navigation";
 
 interface Props {
   addDefaultAllowance: (defaults: Payload) => void;
   updateDefaultAllowance: (defaults: Payload) => void;
   deleteDefaultAllowance: (defaults: Payload) => void;
+  navigation: NavigationScreenProp<any>;
 }
 
 interface State {
@@ -35,14 +37,22 @@ class DefaultAllowanceForm extends React.Component<Props, State> {
     return(
       <Container>
         <Header>
-          <Text>{this.state.title}</Text>
+          <Left>
+            <Icon type="AntDesign" name="down"
+              onPress={() => this.props.navigation.goBack()}
+            />
+          </Left>
+          <Body style={{ alignItems: "center" }}>
+            <Title>DefaultAllowanceForm</Title>
+          </Body>
+          <Right></Right>
         </Header>
         <Content>
           <Form>
             <Item picker stackedLabel >
+              <Label>User</Label>
               <Picker
                 mode="dropdown"
-                placeholder="User"
                 iosIcon={<Icon name="arrow-down" />}
                 selectedValue={this.state.userId}
                 onValueChange={itemValue => {this.setState({ userId: itemValue })}}
@@ -51,13 +61,16 @@ class DefaultAllowanceForm extends React.Component<Props, State> {
               </Picker>
             </Item>
             <Item stackedLabel>
-              <Input placeholder="Title" onChangeText={title => this.setState({ title })} />
+              <Label>Title</Label>
+              <Input onChangeText={title => this.setState({ title })} />
             </Item>
-            <Item>
-              <Input placeholder="amount" onChangeText={amount => this.setState({ amount })} />
+            <Item stackedLabel>
+              <Label>amount</Label>
+              <Input onChangeText={amount => this.setState({ amount })} />
             </Item>
-            <Item>
-              <Input placeholder="memo" onChangeText={memo => this.setState({ memo })} />
+            <Item stackedLabel>
+              <Label>memo</Label>
+              <Input onChangeText={memo => this.setState({ memo })} />
             </Item>
               <Button onPress={() => this._addDefaultAllowance()} >
                 <Text>button</Text>
@@ -76,6 +89,7 @@ class DefaultAllowanceForm extends React.Component<Props, State> {
     const { userId, title, amount, memo } = this.state;
     console.log(userId, title, amount, memo)
     this.props.addDefaultAllowance({ id: -1, userId, title, amount, memo });
+    this.props.navigation.goBack();
   }
 
 }

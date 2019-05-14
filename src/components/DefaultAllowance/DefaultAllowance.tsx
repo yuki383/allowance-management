@@ -1,20 +1,29 @@
 import * as React from "react"
 import Recipients from "../RecipientsScreen/Recipients";
+import RecipientItem from "../RecipientsScreen/RecipientItem";
 import { Text, Icon } from "native-base";
 import { NavigationScreenProp } from "react-navigation";
-import { NavigationOptions } from "../../constants/types";
+import { NavigationOptions, Allowance } from "../../constants/types";
+import { Payload, } from "../../actions/DefaultActions";
+import { getDefaultAllowance } from "../../models";
+import { connect } from "react-redux";
 
 interface Props {
   navigation: NavigationScreenProp<any>;
+  allowances: {
+    [id: number]: Payload;
+  };
+  Ids: number[];
 }
 
-export default class DefaultAllowance extends React.Component<Props> {
+class DefaultAllowance extends React.Component<Props> {
 
   static navigationOptions: NavigationOptions = ({ navigation }) => ({
     title: "Default",
     headerRight: (
       <Icon 
        type="AntDesign"
+       style={{ padding: 10}}
        name="plus"
       onPress={() => navigation.navigate("DefaultAllowanceForm")}
       />
@@ -22,16 +31,25 @@ export default class DefaultAllowance extends React.Component<Props> {
   })
 
   componentDidMount() {
-    // this.props.navigation.setParams({openForm: this.props.navigation.navigate("DefaultAllowanceForm")})
   }
 
   render() {
+    const { Ids, allowances, navigation } = this.props;
+    const itemList: Allowance[] = getDefaultAllowance(Ids, allowances);
+
     return(
-      <Recipients navigation={this.props.navigation} />
+      <RecipientItem name="hoge" allowances={itemList} navigation={navigation} />
     )
   }
 
-  _openAllowanceForm() {
+}
 
+const mapStateToProps = (state) => {
+  return {
+    ...state.defaultAllowance,
   }
 }
+
+export default connect(
+  mapStateToProps,
+)(DefaultAllowance);
