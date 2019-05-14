@@ -10,7 +10,7 @@ import { isDebuggerStatement } from "@babel/types";
 
 interface State {
   allowances: {
-    [id: number]: Payload;
+    [id: number]: Allowance;
   }
   Ids: number[];
 }
@@ -28,12 +28,10 @@ export const DefaultStatusReducer = createReducer(initialState, {
     console.log(action)
     const { userId, title, amount, memo } = action.payload;
     const id = state.Ids.length;
-    const newAllowance: Payload = {
+    const newAllowance: Allowance = {
+      ...action.payload,
       id,
-      userId,
-      title,
-      amount,
-      memo
+      isDone: false,
     };
     state.allowances[id] = newAllowance;
     state.Ids.push(id);
@@ -41,7 +39,10 @@ export const DefaultStatusReducer = createReducer(initialState, {
 
   [updateDefaultAllowance.type]: (state: State, action: Action) => {
     const { id } = action.payload;
-    state.allowances[id] = action.payload;
+    state.allowances[id] = {
+      ...state.allowances[id],
+      ...action.payload,
+    }
   },
 
   [deleteDefaultAllowance.type]: (state: State, action: Action) => {

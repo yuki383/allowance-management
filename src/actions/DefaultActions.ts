@@ -1,5 +1,5 @@
 import { createAction } from "redux-starter-kit";
-import { User } from "../constants/types";
+import { User, Allowance } from "../constants/types";
 
 export interface Payload {
   id: number;
@@ -8,10 +8,6 @@ export interface Payload {
   amount: string
   memo: string;
 }
-
-export const addDefaultRecipient = createAction("default-recipient/add");
-export const updateDefaultRecipient = createAction("default-recipient/update");
-export const deleteDefaultRecipient = createAction("default-recipient/delete");
 
 export const addDefaultAllowance = createAction("default-allowance/add");
 export const updateDefaultAllowance = createAction("default-allowance/update");
