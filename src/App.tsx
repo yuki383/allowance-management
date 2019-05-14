@@ -12,20 +12,21 @@ import * as React from "react";
 import { createAppContainer, createStackNavigator } from "react-navigation";
 import { Provider } from "react-redux";
 import { store } from "./configureStore";
+import { Root, } from "native-base";
 
 import MonthListScreen from "./components/MonthListScreen/MonthListScreen";
 import AllowancePropertyScreen from "./components/AllowancePropertyScreen/AllowancePropertyScreen";
 import RecipientsScreen from "./components/RecipientsScreen/RecipientsScreen";
-import { Text } from "react-native";
+
 import DefaultAllowance from "./components/DefaultAllowance/DefaultAllowance";
-import DefaultAllowanceForm from "./components/DefaultAllowance/DefaultAllowanceForm";
+import AllowanceForm from "./components/utils/AllowanceForm";
 
 const DefaultAllowanceStack = createStackNavigator({
   DefaultsScreen: {
     screen: DefaultAllowance,
   },
   DefaultAllowanceForm: {
-    screen: DefaultAllowanceForm
+    screen: AllowanceForm
   }
 },
 {
@@ -59,7 +60,7 @@ const RootStack = createStackNavigator(
       screen: AllowancePropertyScreen,
     },
     DefaultAllowanceForm: {
-      screen: DefaultAllowanceForm,
+      screen: AllowanceForm,
     }
   },
   {
@@ -74,7 +75,9 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store} >
+      <Root>
         <AppContainer />
+        </Root>
       </Provider>
     );
   }

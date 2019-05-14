@@ -21,7 +21,7 @@ export interface User {
       name: string;
     }
   },
-  Ids: number;
+  Ids: number[];
 }
 
 export interface Month {

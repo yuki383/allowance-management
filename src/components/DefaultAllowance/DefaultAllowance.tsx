@@ -1,7 +1,6 @@
 import * as React from "react"
-import Recipients from "../RecipientsScreen/Recipients";
 import RecipientItem from "../RecipientsScreen/RecipientItem";
-import { Text, Icon } from "native-base";
+import { Text, Icon, Grid, ActionSheet, Container, Content, View } from "native-base";
 import { NavigationScreenProp } from "react-navigation";
 import { NavigationOptions, Allowance } from "../../constants/types";
 import { Payload, } from "../../actions/DefaultActions";
@@ -31,6 +30,7 @@ class DefaultAllowance extends React.Component<Props> {
   })
 
   componentDidMount() {
+    this.props.navigation.setParams({ actionSheet: this._openActionSheet })
   }
 
   render() {
@@ -38,7 +38,27 @@ class DefaultAllowance extends React.Component<Props> {
     const itemList: Allowance[] = getDefaultAllowance(Ids, allowances);
 
     return(
-      <RecipientItem name="hoge" allowances={itemList} navigation={navigation} />
+      <Container>
+        <Content>
+          <View>
+          <RecipientItem name="hoge" allowances={itemList} navigation={navigation} />
+          <RecipientItem name="fuga" allowances={itemList} navigation={navigation} />
+</View>
+        </Content>
+      </Container>
+    )
+  }
+
+  _openActionSheet() {
+    const buttons = ["User", "Allowance", "Cancel"];
+    const cancelIndex = 2;
+    ActionSheet.show(
+      {
+        options: buttons,
+        cancelButtonIndex: cancelIndex,
+        title: "action",
+      },
+      buttonIndex => {}
     )
   }
 

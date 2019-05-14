@@ -21,7 +21,7 @@ export default class RecipientItem extends React.Component<Props> {
     });
 
     return (
-      <Grid style={{ borderWidth: 1}}>
+        <Grid style={{ borderWidth: 1 }}>
         <Row style={styles.nameRow}>
           <Text style={{ fontSize: 20, padding: 5, paddingLeft: 10,}}>{name}</Text>
         </Row>
@@ -30,7 +30,7 @@ export default class RecipientItem extends React.Component<Props> {
           {cards}
         </ScrollView>
         </Row>
-      </Grid>
+        </Grid>
     )
   }
 }
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
   nameRow: {
     height: 40,
     backgroundColor: "#CCFFFF",
-    borderBottomWidth: 1,
   },
   allowancesRow: {
     height: 160,

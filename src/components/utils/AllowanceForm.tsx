@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Container, Content, Form, Item, Header, Text, Input, Picker, Icon, Button, Label, Left, Body, Right, Title } from "native-base";
+import { Container, Content, Form, Item, Header, Text, Input, Picker, Icon, Button, Label, Left, Body, Right, Title, ActionSheet } from "native-base";
 import { connect } from "react-redux";
 import { addDefaultAllowance, updateDefaultAllowance, deleteDefaultAllowance, Payload } from "../../actions/DefaultActions";
 import { NavigationScreenProp } from "react-navigation";
@@ -87,7 +87,6 @@ class DefaultAllowanceForm extends React.Component<Props, State> {
 
   _addDefaultAllowance() {
     const { userId, title, amount, memo } = this.state;
-    console.log(userId, title, amount, memo)
     this.props.addDefaultAllowance({ id: -1, userId, title, amount, memo });
     this.props.navigation.goBack();
   }

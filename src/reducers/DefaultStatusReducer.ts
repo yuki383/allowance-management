@@ -26,7 +26,6 @@ export const DefaultStatusReducer = createReducer(initialState, {
 
   [addDefaultAllowance.type]: (state: State, action: Action) => {
     console.log(action)
-    const { userId, title, amount, memo } = action.payload;
     const id = state.Ids.length;
     const newAllowance: Allowance = {
       ...action.payload,
