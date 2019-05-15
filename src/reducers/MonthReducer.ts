@@ -1,9 +1,8 @@
 import { createReducer, Action } from "redux-starter-kit";
 import { Month, ActionType } from "../constants/types";
 import { createMonthList, deleteMonthList, addMonthAllowance, Payload, } from "../actions/MonthListActions";
-import { isDebuggerStatement } from "@babel/types";
 
-interface State {
+export interface State {
   monthList: Month;
   ids: number[];
 }

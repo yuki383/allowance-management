@@ -14,6 +14,14 @@ export interface ActionType<T> {
   payload: T;
 }
 
+export interface AllowanceState {
+  allowances: Allowances;
+  ids: number[];
+}
+
+export type AllowanceAction = ActionType<Allowance>
+
+// ドメイン
 export interface User {
   ByIds: {
     [id: number]: {

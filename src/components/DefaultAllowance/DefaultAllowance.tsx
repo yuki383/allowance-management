@@ -2,17 +2,14 @@ import * as React from "react"
 import RecipientItem from "../RecipientsScreen/RecipientItem";
 import { Text, Icon, Grid, ActionSheet, Container, Content, View } from "native-base";
 import { NavigationScreenProp } from "react-navigation";
-import { NavigationOptions, Allowance } from "../../constants/types";
+import { NavigationOptions, Allowance, AllowanceState } from "../../constants/types";
 import { Payload, } from "../../actions/DefaultActions";
 import { getDefaultAllowance } from "../../models";
 import { connect } from "react-redux";
 
 interface Props {
   navigation: NavigationScreenProp<any>;
-  allowances: {
-    [id: number]: Payload;
-  };
-  Ids: number[];
+  allowanceState: AllowanceState;
 }
 
 class DefaultAllowance extends React.Component<Props> {
@@ -22,8 +19,8 @@ class DefaultAllowance extends React.Component<Props> {
   }
 
   render() {
-    const { Ids, allowances, navigation } = this.props;
-    const itemList: Allowance[] = getDefaultAllowance(Ids, allowances);
+    const { navigation, allowanceState } = this.props;
+    const itemList: Allowance[] = getDefaultAllowance(allowanceState);
 
     return(
       <Container>
@@ -54,7 +51,7 @@ class DefaultAllowance extends React.Component<Props> {
 
 const mapStateToProps = (state) => {
   return {
-    ...state.defaultAllowance,
+    allowanceState: state.defaultAllowance,
   }
 }
 

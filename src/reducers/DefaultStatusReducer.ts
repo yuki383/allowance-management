@@ -8,16 +8,16 @@ import {
 } from "../actions/DefaultActions";
 import { isDebuggerStatement } from "@babel/types";
 
-interface State {
+export interface State {
   allowances: {
     [id: number]: Allowance;
   }
-  Ids: number[];
+  ids: number[];
 }
 
 const initialState: State = {
   allowances: {},
-  Ids: []
+  ids: []
 }
 
 type Action = ActionType<Payload>
@@ -25,15 +25,14 @@ type Action = ActionType<Payload>
 export const DefaultStatusReducer = createReducer(initialState, {
 
   [addDefaultAllowance.type]: (state: State, action: Action) => {
-    console.log(action)
-    const id = state.Ids.length;
+    const id = state.ids.length;
     const newAllowance: Allowance = {
       ...action.payload,
       id,
       isDone: false,
     };
     state.allowances[id] = newAllowance;
-    state.Ids.push(id);
+    state.ids.push(id);
   },
 
   [updateDefaultAllowance.type]: (state: State, action: Action) => {
@@ -46,9 +45,9 @@ export const DefaultStatusReducer = createReducer(initialState, {
 
   [deleteDefaultAllowance.type]: (state: State, action: Action) => {
     const { id } = action.payload;
-    const { allowances, Ids } = state;
-    const index = Ids.indexOf(id);
+    const { allowances, ids } = state;
+    const index = ids.indexOf(id);
     delete allowances[id];
-    Ids.splice(index, 1);
+    ids.splice(index, 1);
   }
 })
