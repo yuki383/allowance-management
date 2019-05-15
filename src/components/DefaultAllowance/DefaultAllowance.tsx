@@ -24,7 +24,7 @@ class DefaultAllowance extends React.Component<Props> {
        type="AntDesign"
        style={{ padding: 10}}
        name="plus"
-      onPress={() => navigation.navigate("DefaultAllowanceForm")}
+      onPress={() => navigation.navigate("AllowanceForm")}
       />
     ),
   })

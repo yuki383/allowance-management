@@ -9,7 +9,7 @@ interface Props {
   addDefaultAllowance: (defaults: Payload) => void;
   updateDefaultAllowance: (defaults: Payload) => void;
   deleteDefaultAllowance: (defaults: Payload) => void;
-  navigation: NavigationScreenProp<any>;
+  navigation: NavigationScreenProp<{ mode?: "default"}>;
 }
 
 interface State {
@@ -37,7 +37,7 @@ class DefaultAllowanceForm extends React.Component<Props, State> {
   render() {
     return(
       <Container>
-        <ModalHeader title="allowance" navigation={this.props.navigation} />
+        <ModalHeader navigation={this.props.navigation} />
         <Content>
           <Form>
             <Item picker stackedLabel >
@@ -66,6 +66,7 @@ class DefaultAllowanceForm extends React.Component<Props, State> {
               <Button onPress={() => this._addDefaultAllowance()} >
                 <Text>button</Text>
               </Button>
+              <Button onPress={() => this.props.navigation.navigate("UserForm")} ><Text>hoge</Text></Button>
           </Form>
           <Text>userId: {this.state.userId}</Text>
           <Text>title: {this.state.title}</Text>
@@ -85,9 +86,13 @@ class DefaultAllowanceForm extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  return {
+    ...state.users,
+    ...ownProps,
+  }
 }
 
 export default connect(
-null,
-{ addDefaultAllowance }
+  mapStateToProps,
+  { addDefaultAllowance }
 )(DefaultAllowanceForm);

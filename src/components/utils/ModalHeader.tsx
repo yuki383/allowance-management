@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
 
 interface Props {
   navigation: NavigationScreenProp<any>
-  title: string;
 }
 
 export default class ModalHeader extends React.Component<Props> {
@@ -23,11 +22,9 @@ export default class ModalHeader extends React.Component<Props> {
               style={styles.Icon}
               type="AntDesign" 
               name="down"
-              onPress={() => this.props.navigation.goBack()}
             />
           </Left>
           <Body style={{ alignItems: "center" }}>
-            <Title>{this.props.title}</Title>
           </Body>
           <Right></Right>
         </Header>

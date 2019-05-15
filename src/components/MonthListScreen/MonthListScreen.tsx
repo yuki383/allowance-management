@@ -16,7 +16,7 @@ import { createMonthList } from "../../actions/MonthListActions";
 
 const styles = StyleSheet.create({
   headerIcon: {
-    padding: 5,
+    padding: 10,
   }
 })
 
