@@ -17,18 +17,6 @@ interface Props {
 
 class DefaultAllowance extends React.Component<Props> {
 
-  static navigationOptions: NavigationOptions = ({ navigation }) => ({
-    title: "Default",
-    headerRight: (
-      <Icon 
-       type="AntDesign"
-       style={{ padding: 10}}
-       name="plus"
-      onPress={() => navigation.navigate("AllowanceForm")}
-      />
-    ),
-  })
-
   componentDidMount() {
     this.props.navigation.setParams({ actionSheet: this._openActionSheet })
   }

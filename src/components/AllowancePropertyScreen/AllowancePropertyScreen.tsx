@@ -15,7 +15,6 @@ export default class AllowancePropertyScreen extends React.Component<Props> {
     const { id, isDone, title, amount, memo } = navigation.getParam("allowance");
     return(
       <Container>
-        <ModalHeader navigation={navigation} />
         <Content>
           <Text>id: {id}</Text>
           <Text>isDone: {isDone ? "true": "false"}</Text>

@@ -29,18 +29,6 @@ interface Props {
 
 class AllowanceListScreen extends React.Component<Props> {
 
-  static navigationOptions: NavigationOptions = ({navigation}) =>  ({
-    title: "AllowanceListScreen",
-    headerRight: (
-      <Icon 
-        type="AntDesign"
-        name="setting"
-        style={styles.headerIcon}
-        onPress={() => navigation.navigate("Defaults", { title: "Defaults"})}
-        />
-    )
-  })
-
   componentDidMount() {
     this.props.navigation.setParams({createMonthList: this.props.createMonthList});
     this._createMonthItem();

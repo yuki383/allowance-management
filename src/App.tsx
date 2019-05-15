@@ -14,7 +14,7 @@ import { Provider } from "react-redux";
 import { store } from "./configureStore";
 import { Root, } from "native-base";
 
-import { RootStack } from "./navigations"
+import { RootStack } from "./navigations";
 
 const AppContainer = createAppContainer(RootStack);
 

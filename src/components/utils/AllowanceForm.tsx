@@ -9,7 +9,7 @@ interface Props {
   addDefaultAllowance: (defaults: Payload) => void;
   updateDefaultAllowance: (defaults: Payload) => void;
   deleteDefaultAllowance: (defaults: Payload) => void;
-  navigation: NavigationScreenProp<{ mode?: "default"}>;
+  navigation: NavigationScreenProp<{ mode?: "default" }>;
 }
 
 interface State {
@@ -22,12 +22,12 @@ interface State {
 class DefaultAllowanceForm extends React.Component<Props, State> {
   constructor(props) {
     super(props),
-    this.state = {
-      userId: 1,
-      title: "",
-      amount: "",
-      memo: "",
-    }
+      this.state = {
+        userId: 1,
+        title: "",
+        amount: "",
+        memo: "",
+      }
   }
 
   componentDidMount() {
@@ -35,9 +35,8 @@ class DefaultAllowanceForm extends React.Component<Props, State> {
   }
 
   render() {
-    return(
+    return (
       <Container>
-        <ModalHeader navigation={this.props.navigation} />
         <Content>
           <Form>
             <Item picker stackedLabel >
@@ -46,7 +45,7 @@ class DefaultAllowanceForm extends React.Component<Props, State> {
                 mode="dropdown"
                 iosIcon={<Icon name="arrow-down" />}
                 selectedValue={this.state.userId}
-                onValueChange={itemValue => {this.setState({ userId: itemValue })}}
+                onValueChange={itemValue => { this.setState({ userId: itemValue }) }}
               >
                 <Picker.Item label={"hoge"} value={1} />
               </Picker>
@@ -63,10 +62,15 @@ class DefaultAllowanceForm extends React.Component<Props, State> {
               <Label>memo</Label>
               <Input onChangeText={memo => this.setState({ memo })} />
             </Item>
-              <Button onPress={() => this._addDefaultAllowance()} >
-                <Text>button</Text>
-              </Button>
-              <Button onPress={() => this.props.navigation.navigate("UserForm")} ><Text>hoge</Text></Button>
+            <Button onPress={() => this._addDefaultAllowance()} >
+              <Text>button</Text>
+            </Button>
+            <Button
+              onPress={() => {
+                this.props.navigation.navigate("UserForm");
+              }} >
+              <Text>hoge</Text>
+            </Button>
           </Form>
           <Text>userId: {this.state.userId}</Text>
           <Text>title: {this.state.title}</Text>
@@ -80,7 +84,7 @@ class DefaultAllowanceForm extends React.Component<Props, State> {
   _addDefaultAllowance() {
     const { userId, title, amount, memo } = this.state;
     this.props.addDefaultAllowance({ id: -1, userId, title, amount, memo });
-    this.props.navigation.goBack();
+    this.props.navigation.pop();
   }
 
 }

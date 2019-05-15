@@ -22,6 +22,7 @@ export default class ModalHeader extends React.Component<Props> {
               style={styles.Icon}
               type="AntDesign" 
               name="down"
+              onPress={() => this.props.navigation.pop()}
             />
           </Left>
           <Body style={{ alignItems: "center" }}>
