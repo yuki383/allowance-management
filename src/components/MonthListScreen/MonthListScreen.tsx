@@ -50,11 +50,15 @@ class AllowanceListScreen extends React.Component<Props> {
     const { ids, monthList } = monthListState;
     const defaults = getAllowance(defaultState);
     const nextMonth = this._getMonth(1);
+
+    // ここら辺propのidを参照しちゃってるからおかしい
     if (ids.length === 0) {
-      const allowances = this._createAllowance(defaults);
-      createMonthList({ date: this._getMonth(0), allowance: allowances });
-    }
-    if (!ids.some(id => monthList[id].date === nextMonth)) {
+      this._createAllowance(defaults)
+      .then(allowances => {
+        console.log("allowance",allowances)
+        createMonthList({ date: this._getMonth(0), allowance: allowances });
+      });
+    } else if (!ids.some(id => monthList[id].date === nextMonth)) {
       const allowances = this._createAllowance(defaults);
       createMonthList({ date: nextMonth, allowance: allowances });
     }
@@ -67,7 +71,8 @@ class AllowanceListScreen extends React.Component<Props> {
 
   async _createAllowance(allowances: Allowance[]) {
     const { allowanceId: id, addAllowance } = this.props;
-    let newId: number = id[id.length - 1] ? id[id.length - 1] + 1 : 0;
+    const start = id.length > 0 ? id[id.length - 1] + 1 : 0;
+    let newId = start;
     let idsOfMonth: number[] = [];
     await allowances.forEach(allowance => {
       const newAllowance: Allowance = {
@@ -76,11 +81,12 @@ class AllowanceListScreen extends React.Component<Props> {
       }
 
       addAllowance(newAllowance);
+      console.log(newId)
       idsOfMonth.push(newId);
       newId += 1;
     });
 
-    return newId;
+    return idsOfMonth;
   }
 }
 

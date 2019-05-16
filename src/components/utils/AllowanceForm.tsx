@@ -24,7 +24,7 @@ class DefaultAllowanceForm extends React.Component<Props, State> {
   constructor(props) {
     super(props),
       this.state = {
-        userId: 1,
+        userId: 0,
         title: "",
         amount: "",
         memo: "",

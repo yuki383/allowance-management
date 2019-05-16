@@ -20,12 +20,10 @@ class Recipients extends React.Component<Props> {
   render() {
     const { navigation, allowanceState, monthList, usersState } = this.props;
     const AllowamceOfMonthId = navigation.getParam("allowances", []);
-    console.log(this.props)
     const { Ids: idOfUser, ByIds: users} = usersState;
     const allowances = getAllowance(allowanceState).filter(allowance => AllowamceOfMonthId.some(n => n === allowance.id));
     const grouped = groupAllowanceByUserId(allowances, idOfUser);
     const hoge = idOfUser.map(id => {
-      console.log("id", id)
       const name = users[id]["name"];
       const allowances = grouped[id];
       return <RecipientItem key={id} name={name} allowances={allowances} navigation={navigation} />

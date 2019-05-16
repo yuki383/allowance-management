@@ -17,10 +17,10 @@ type MonthAllowanceAction =  ActionType<{ id: number, allowance: number}>
 export const MonthReducer = createReducer(initialState, {
 
   [createMonthList.type]: (state: State, action: ActionType<Payload>) => {
-    const { date } = action.payload;
+    const { date, allowance } = action.payload;
     const index = state.ids.length;
     state.ids.push(index);
-    state.monthList[index] = { id: index, date, allowances: [] };
+    state.monthList[index] = { id: index, date, allowances: allowance };
   },
 
   [deleteMonthList.type]: (state: State, action: ActionType<Payload>) => {

@@ -26,9 +26,8 @@ class DefaultAllowance extends React.Component<Props> {
       <Container>
         <Content>
           <View>
-          <RecipientItem name="hoge" allowances={itemList} navigation={navigation} />
-          <RecipientItem name="fuga" allowances={itemList} navigation={navigation} />
-</View>
+            <RecipientItem name="hoge" allowances={itemList} navigation={navigation} />
+          </View>
         </Content>
       </Container>
     )

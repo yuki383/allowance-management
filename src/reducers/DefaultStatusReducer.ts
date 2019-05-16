@@ -40,7 +40,7 @@ export const DefaultStatusReducer = createReducer(initialMock, {
 
   [addDefaultAllowance.type]: (state: State, action: Action) => {
     const { ids } = state;
-    const id = ids[ids.length - 1] ? ids[ids.length - 1] + 1 : 0;
+    const id = ids.length > 0 ? ids[ids.length - 1] + 1 : 0;
     const newAllowance: Allowance = {
       ...action.payload,
       id,

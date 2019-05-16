@@ -2,7 +2,7 @@ import { Payload } from "../actions/DefaultActions";
 import {Allowance, Allowances, AllowanceState} from "../constants/types";
 import { State as DefaultState } from "../reducers/DefaultStatusReducer";
 
-export const getAllowance = (allowance: AllowanceState) => {
+export const getAllowance = (allowance: AllowanceState): Allowance[] => {
   const { ids, allowances } = allowance;
   return ids.map(id => {
     return {
