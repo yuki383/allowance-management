@@ -10,25 +10,28 @@ import {
 import { NavigationScreenProp } from "react-navigation";
 
 import MonthList from "./MonthList";
-import { NavigationOptions, Month, } from "../../constants/types";
 import { connect } from "react-redux";
 import { createMonthList } from "../../actions/MonthListActions";
 import { State as MonthState } from "../../reducers/MonthReducer";
 import { State as DefaultState } from "../../reducers/DefaultStatusReducer";
-import { getDefaultAllowance } from "../../models";
+import { getAllowance } from "../../models";
+import { addAllowance } from "../../actions/AllowanceActions";
+import { Allowance } from "../../constants/types";
 
 interface Props {
   navigation: NavigationScreenProp<any, any>;
   monthListState: MonthState;
   defaultState: DefaultState;
+  allowanceId: number[];
   ids: number[];
   createMonthList: ({ date: string, allowance: number }) => void;
+  addAllowance: (allowance: Allowance) => void;
 }
 
 class AllowanceListScreen extends React.Component<Props> {
 
   componentDidMount() {
-    this.props.navigation.setParams({createMonthList: this.props.createMonthList});
+    this.props.navigation.setParams({ createMonthList: this.props.createMonthList });
     this._createMonthItem();
   }
 
@@ -42,16 +45,18 @@ class AllowanceListScreen extends React.Component<Props> {
     )
   }
 
-  _createMonthItem = () => {
+  async _createMonthItem() {
     const { createMonthList, monthListState, defaultState } = this.props;
-    const { ids, monthList} = monthListState;
-    const defaults = getDefaultAllowance(defaultState);
+    const { ids, monthList } = monthListState;
+    const defaults = getAllowance(defaultState);
     const nextMonth = this._getMonth(1);
     if (ids.length === 0) {
-      createMonthList({ date: this._getMonth(0), allowance: 0 });
+      const allowances = this._createAllowance(defaults);
+      createMonthList({ date: this._getMonth(0), allowance: allowances });
     }
     if (!ids.some(id => monthList[id].date === nextMonth)) {
-      createMonthList({ date: nextMonth, allowance: 0 });
+      const allowances = this._createAllowance(defaults);
+      createMonthList({ date: nextMonth, allowance: allowances });
     }
   }
 
@@ -60,15 +65,22 @@ class AllowanceListScreen extends React.Component<Props> {
     return date.getFullYear() + "/" + ("00" + (date.getMonth() + 1 + plus)).slice(-2);
   }
 
-  /**
-   * TODO AllowanceReducerを実装したら、
-   * デフォルトから付きのAllowanceを作成
-   * 作成したAllowanceのIDからMonthListを作成
-   */
-  _createAllowance = (state: DefaultState) => {
-    const { ids: Ids, allowances } = state;
-    let idsOfMonth = [];
+  async _createAllowance(allowances: Allowance[]) {
+    const { allowanceId: id, addAllowance } = this.props;
+    let newId: number = id[id.length - 1] ? id[id.length - 1] + 1 : 0;
+    let idsOfMonth: number[] = [];
+    await allowances.forEach(allowance => {
+      const newAllowance: Allowance = {
+        ...allowance,
+        id: newId
+      }
 
+      addAllowance(newAllowance);
+      idsOfMonth.push(newId);
+      newId += 1;
+    });
+
+    return newId;
   }
 }
 
@@ -76,11 +88,12 @@ const mapStateToProps = (state, ownProps) => {
   return {
     monthListState: state.monthList,
     defaultState: state.defaultAllowance,
+    allowanceId: state.allowance.ids,
     ...ownProps,
   }
 }
 
 export default connect(
   mapStateToProps,
-  { createMonthList }
+  { createMonthList, addAllowance }
 )(AllowanceListScreen);

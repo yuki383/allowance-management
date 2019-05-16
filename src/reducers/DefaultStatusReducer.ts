@@ -20,12 +20,27 @@ const initialState: State = {
   ids: []
 }
 
+const initialMock: State = {
+  allowances: {
+    0: {
+      id: 0,
+      userId: 0,
+      isDone: false,
+      title: "Monthly Allowance",
+      amount: "3000",
+      memo: "monthly allowance for user 0."
+    }
+  },
+  ids: [0]
+}
+
 type Action = ActionType<Payload>
 
-export const DefaultStatusReducer = createReducer(initialState, {
+export const DefaultStatusReducer = createReducer(initialMock, {
 
   [addDefaultAllowance.type]: (state: State, action: Action) => {
-    const id = state.ids.length;
+    const { ids } = state;
+    const id = ids[ids.length - 1] ? ids[ids.length - 1] + 1 : 0;
     const newAllowance: Allowance = {
       ...action.payload,
       id,

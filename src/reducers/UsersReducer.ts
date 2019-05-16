@@ -7,7 +7,17 @@ const initialState: User = {
   Ids: [],
 }
 
-export const usersReducer = createReducer(initialState, {
+const initialMock: User = {
+  ByIds: {
+    0: {
+      id: 0,
+      name: "user 0"
+    }
+  },
+  Ids: [0]
+}
+
+export const usersReducer = createReducer(initialMock, {
   [addUser.type]: (state: User, action: ActionType<{name: string}>) => {
     const id = state.Ids.length;
     state.ByIds[id] = {

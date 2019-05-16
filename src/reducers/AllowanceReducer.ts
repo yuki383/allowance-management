@@ -11,7 +11,8 @@ const initialState: AllowanceState = {
 
 export const allowanceReducer = createReducer(initialState, {
   [addAllowance.type]: (state: AllowanceState, action: AllowanceAction) => {
-    const id = state.ids.length;
+    const { ids } = state;
+    const id = ids[ids.length - 1] ? ids[ids.length - 1] + 1 : 0;
     const newAllowance: Allowance = {
       ...action.payload,
       id

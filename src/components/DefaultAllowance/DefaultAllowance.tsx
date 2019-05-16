@@ -4,7 +4,7 @@ import { Text, Icon, Grid, ActionSheet, Container, Content, View } from "native-
 import { NavigationScreenProp } from "react-navigation";
 import { NavigationOptions, Allowance, AllowanceState } from "../../constants/types";
 import { Payload, } from "../../actions/DefaultActions";
-import { getDefaultAllowance } from "../../models";
+import { getAllowance } from "../../models";
 import { connect } from "react-redux";
 
 interface Props {
@@ -20,7 +20,7 @@ class DefaultAllowance extends React.Component<Props> {
 
   render() {
     const { navigation, allowanceState } = this.props;
-    const itemList: Allowance[] = getDefaultAllowance(allowanceState);
+    const itemList: Allowance[] = getAllowance(allowanceState);
 
     return(
       <Container>

@@ -4,62 +4,49 @@ import { NavigationScreenProp } from "react-navigation";
 import { StyleSheet } from "react-native";
 
 import RecipientItem from "./RecipientItem";
-
+import { AllowanceState, User, Month } from "../../constants/types";
+import { connect } from "react-redux";
+import { getAllowance, groupAllowanceByUserId,} from "../../models";
 interface Props {
   navigation: NavigationScreenProp<any>;
+  monthList: Month;
+  usersState: User;
+  allowanceState: AllowanceState;
 }
 
-const arr = {
-    name: "hoge",
-    allowances: [
-      {
-        id: 1,
-        userId: 1,
-        isDone: false,
-        title: "monthly allowance",
-        amount: "3000",
-        memo: "monthly allowance of highscool student in my family."
-      },
-      {
-        id: 2,
-        userId: 1,
 
-        isDone: false,
-        title: "hoge",
-        amount: "40000",
-        memo: "aaaaaa"
-      },
-      {
-        id: 3,
-        userId: 1,
-        isDone: true,
-        title: "hoge",
-        amount: "40000",
-        memo: "aaaaaa"
-      },
-      {
-        id: 4,
-        userId: 1,
-        isDone: false,
-        title: "hoge",
-        amount: "3058",
-        memo: "aaaaaa"
-      },
-    ]
-  }
-
-
-export default class Recipients extends React.Component<Props> {
+class Recipients extends React.Component<Props> {
 
   render() {
-    const { name, allowances } = arr;
-    const { navigation } = this.props;
+    const { navigation, allowanceState, monthList, usersState } = this.props;
+    const AllowamceOfMonthId = navigation.getParam("allowances", []);
+    console.log(this.props)
+    const { Ids: idOfUser, ByIds: users} = usersState;
+    const allowances = getAllowance(allowanceState).filter(allowance => AllowamceOfMonthId.some(n => n === allowance.id));
+    const grouped = groupAllowanceByUserId(allowances, idOfUser);
+    const hoge = idOfUser.map(id => {
+      console.log("id", id)
+      const name = users[id]["name"];
+      const allowances = grouped[id];
+      return <RecipientItem key={id} name={name} allowances={allowances} navigation={navigation} />
+    })
 
     return(
       <Grid>
-        <RecipientItem name={name} allowances={allowances} navigation={navigation} />
+      {hoge}
       </Grid>
     )
 
   }
 }
+
+const mapStateToProps = (state, ownProps) => ({
+  allowanceState: state.allowance,
+  usersState: state.users,
+  monthList: state.monthList.monthList,
+  ...ownProps,
+})
+
+export default connect(
+  mapStateToProps,
+)(Recipients);

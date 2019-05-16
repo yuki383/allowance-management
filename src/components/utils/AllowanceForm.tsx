@@ -4,11 +4,12 @@ import { connect } from "react-redux";
 import { addDefaultAllowance, updateDefaultAllowance, deleteDefaultAllowance, Payload } from "../../actions/DefaultActions";
 import { NavigationScreenProp } from "react-navigation";
 import ModalHeader from "./ModalHeader";
+import { Allowance } from "../../constants/types";
 
 interface Props {
-  addDefaultAllowance: (defaults: Payload) => void;
-  updateDefaultAllowance: (defaults: Payload) => void;
-  deleteDefaultAllowance: (defaults: Payload) => void;
+  addDefaultAllowance: (defaults: Allowance) => void;
+  updateDefaultAllowance: (defaults: Allowance) => void;
+  deleteDefaultAllowance: (defaults: Allowance) => void;
   navigation: NavigationScreenProp<{ mode?: "default" }>;
 }
 
@@ -69,7 +70,7 @@ class DefaultAllowanceForm extends React.Component<Props, State> {
               onPress={() => {
                 this.props.navigation.navigate("UserForm");
               }} >
-              <Text>hoge</Text>
+              <Text>user form</Text>
             </Button>
           </Form>
           <Text>userId: {this.state.userId}</Text>
@@ -83,7 +84,7 @@ class DefaultAllowanceForm extends React.Component<Props, State> {
 
   _addDefaultAllowance() {
     const { userId, title, amount, memo } = this.state;
-    this.props.addDefaultAllowance({ id: -1, userId, title, amount, memo });
+    this.props.addDefaultAllowance({ id: -1, userId, title, amount, memo, isDone: false });
     this.props.navigation.pop();
   }
 
