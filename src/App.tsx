@@ -11,10 +11,12 @@
 import * as React from "react";
 import { createAppContainer, createStackNavigator } from "react-navigation";
 import { Provider } from "react-redux";
-import { store } from "./configureStore";
-import { Root, } from "native-base";
+import { store, persistor } from "./configureStore";
+import { Root, Button, Text, } from "native-base";
+import { PersistGate } from "redux-persist/integration/react";
 
 import { RootStack } from "./navigations";
+
 
 const AppContainer = createAppContainer(RootStack);
 
@@ -22,9 +24,12 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store} >
+        <PersistGate loading={null} persistor={persistor} >
       <Root>
         <AppContainer />
+        <Button onPress={() => persistor.purge()} ><Text>purge </Text></Button>
         </Root>
+        </PersistGate>
       </Provider>
     );
   }

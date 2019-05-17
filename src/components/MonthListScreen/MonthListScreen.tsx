@@ -6,6 +6,7 @@ import {
   Container,
   Content,
   Icon,
+  Button,
 } from "native-base";
 import { NavigationScreenProp } from "react-navigation";
 
@@ -59,8 +60,8 @@ class AllowanceListScreen extends React.Component<Props> {
         createMonthList({ date: this._getMonth(0), allowance: allowances });
       });
     } else if (!ids.some(id => monthList[id].date === nextMonth)) {
-      const allowances = this._createAllowance(defaults);
-      createMonthList({ date: nextMonth, allowance: allowances });
+      this._createAllowance(defaults)
+      .then(allowances => createMonthList({ date: nextMonth, allowance: allowances }));
     }
   }
 
