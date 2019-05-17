@@ -7,19 +7,24 @@ import { connect } from "react-redux";
 
 interface Props {
     id: number;
-    date: string;
-    allowances: number[];
+    month: {
+      id: number;
+      date: string;
+      allowances: number[];
+    }
   navigation: NavigationScreenProp<any, any>
 }
 class MonthListItem extends React.Component<Props> {
   render() {
-    const { navigation, id, date, allowances} = this.props;
+    const { navigation, month } = this.props;
+    const { id, date, allowances } = month;
     // TODO Recipientsを実装したらRightのアイコンのいろをisDoneに合わせて変更できるようにする
     return(
       <ListItem
         onPress={() => 
           navigation.navigate("Recipients", {
             title: date,
+            monthId: id,
             allowances,
           })}
       >

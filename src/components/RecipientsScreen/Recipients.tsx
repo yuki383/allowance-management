@@ -18,8 +18,10 @@ interface Props {
 class Recipients extends React.Component<Props> {
 
   render() {
-    const { navigation, allowanceState, monthList, usersState } = this.props;
-    const AllowamceOfMonthId = navigation.getParam("allowances", []);
+    const { navigation, allowanceState, usersState, monthList } = this.props;
+    // TODO ナビゲーションのパラメータをMonthIDにして、ここでAllowanceOfMonthIdを計算させる
+    const monthId = navigation.getParam("monthId")
+    const AllowamceOfMonthId = monthList[monthId].allowances;
     const { Ids: idOfUser, ByIds: users} = usersState;
     const allowances = getAllowance(allowanceState).filter(allowance => AllowamceOfMonthId.some(n => n === allowance.id));
     const grouped = groupAllowanceByUserId(allowances, idOfUser);

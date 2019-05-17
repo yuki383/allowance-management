@@ -29,7 +29,7 @@ export const allowanceReducer = createReducer(initialState, {
     }
   },
 
-  [updateAllowance.type]: (state: AllowanceState, action: AllowanceAction) => {
+  [deleteAllowance.type]: (state: AllowanceState, action: AllowanceAction) => {
     const { id } = action.payload;
     const { allowances, ids } = state;
     const index = ids.indexOf(id);

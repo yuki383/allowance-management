@@ -51,7 +51,7 @@ class AllowanceListScreen extends React.Component<Props> {
     const defaults = getAllowance(defaultState);
     const nextMonth = this._getMonth(1);
 
-    // ここら辺propのidを参照しちゃってるからおかしい
+    // TODO 今はMonthが一つもない時に今月しか追加してないが、今月と来月を追加するように修正
     if (ids.length === 0) {
       this._createAllowance(defaults)
       .then(allowances => {
@@ -81,7 +81,6 @@ class AllowanceListScreen extends React.Component<Props> {
       }
 
       addAllowance(newAllowance);
-      console.log(newId)
       idsOfMonth.push(newId);
       newId += 1;
     });

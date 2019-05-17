@@ -30,14 +30,17 @@ const MainStack = createStackNavigator(
     },
     Recipients: {
       screen: RecipientsScreen,
-      navigationOptions: ({ navigation }) => ({
+      navigationOptions: ({ navigation }) => {
+        const monthId = navigation.getParam("monthId");
+        return {
         title: navigation.getParam("title"),
         headerRight: <Icon
           type="AntDesign"
           name="plus"
           style={{padding:10}}
+          onPress={() => navigation.navigate("AllowanceForm", { mode: "allowance", monthId})}
         />
-      })
+      }}
     },
     Defaults: {
       screen: DefaultAllowance,
@@ -48,7 +51,7 @@ const MainStack = createStackNavigator(
             type="AntDesign"
             style={{ padding: 10 }}
             name="plus"
-            onPress={() => navigation.navigate("AllowanceForm")}
+            onPress={() => navigation.navigate("AllowanceForm", { mode: "default"})}
           />
         ),
       })

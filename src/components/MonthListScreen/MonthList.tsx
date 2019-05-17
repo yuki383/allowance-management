@@ -15,7 +15,7 @@ interface Props {
 class MonthList extends React.Component<Props> {
   render() {
     const items = this.props.ids.map(id => {
-      return <MonthListItem key={id} {...this.props.monthList[id]} navigation={this.props.navigation} />
+      return <MonthListItem key={id} month={this.props.monthList[id]} navigation={this.props.navigation} />
     });
     return (
       <List>
