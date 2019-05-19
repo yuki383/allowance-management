@@ -60,7 +60,7 @@ class AllowanceForm extends React.Component<Props> {
   }
 
   _pressSubmitButton() {
-    const { inputs, navigation } = this.props;
+    const { inputs, navigation, inputAllowanceState } = this.props;
     const { userId, title, amount, memo } = inputs;
     const mode = navigation.getParam("mode");
 
@@ -73,6 +73,7 @@ class AllowanceForm extends React.Component<Props> {
           this._addAllowaneOfMonth();
           break;
       }
+      inputAllowanceState({ userId: 0, memo: "", title: undefined, amount: undefined});
       navigation.pop();
     }
     
