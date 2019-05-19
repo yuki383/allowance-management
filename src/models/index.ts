@@ -1,5 +1,5 @@
 import { Payload } from "../actions/DefaultActions";
-import {Allowance, Allowances, AllowanceState} from "../constants/types";
+import {Allowance, Allowances, AllowanceState, User} from "../constants/types";
 import { State as DefaultState } from "../reducers/DefaultStatusReducer";
 
 export const getAllowance = (allowance: AllowanceState): Allowance[] => {
@@ -9,6 +9,11 @@ export const getAllowance = (allowance: AllowanceState): Allowance[] => {
       ...allowances[id],
     }
   })
+}
+
+export const getUser = (users: User): {id: number, name: string}[] => {
+  const { ByIds, Ids } = users;
+  return Ids.map(id => ByIds[id]);
 }
 
 interface groupedAllowance {
@@ -25,8 +30,9 @@ export const groupAllowanceByUserId: (allowances: Allowance[], userId: number[])
       return group(containter, index - 1);
     }
   }
-  const containter: groupedAllowance = userId.reduce(makeAllowanceContainer, {});
-  return group(containter, allowances.length);
+  const container: groupedAllowance = userId.reduce(makeAllowanceContainer, {});
+  console.log("container", container)
+  return group(container, allowances.length);
 
 }
 

@@ -22,6 +22,7 @@ const AppContainer = createAppContainer(RootStack);
 
 export default class App extends React.Component {
   render() {
+    // TODO 完成時にpurgeのボタンを削除する
     return (
       <Provider store={store} >
         <PersistGate loading={null} persistor={persistor} >

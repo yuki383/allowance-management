@@ -6,12 +6,14 @@ import { addAllowance, } from "../../actions/AllowanceActions";
 import { addMonthAllowance } from "../../actions/MonthListActions";
 import { NavigationScreenProp } from "react-navigation";
 import ModalHeader from "./ModalHeader";
-import { Allowance } from "../../constants/types";
+import { Allowance, User } from "../../constants/types";
+import UserPicker from "./AllowanceForm/UserPicker";
 
 interface Props {
   addDefaultAllowance: (defaults: Allowance) => void;
   addAllowance: (allowance: Allowance) => void;
   addMonthAllowance: (payload: {id: number; allowance: number;}) => void;
+  users: User;
   allowanceId: number[];
   navigation: NavigationScreenProp<{ mode?: "default" }>;
 }
@@ -47,20 +49,18 @@ class AllowanceForm extends React.Component<Props, State> {
   }
 
   render() {
+    const { users} = this.props;
     return (
       <Container>
         <Content>
           <Form>
             <Item picker stackedLabel >
               <Label>User</Label>
-              <Picker
-                mode="dropdown"
-                iosIcon={<Icon name="arrow-down" />}
+              <UserPicker 
+                handleChangeValue={(value) => this._changePicker(value)}
+                users={users}
                 selectedValue={this.state.userId}
-                onValueChange={itemValue => { this.setState({ userId: itemValue }) }}
-              >
-                <Picker.Item label={"hoge"} value={1} />
-              </Picker>
+              />
             </Item>
             <Item stackedLabel>
               <Label>Title</Label>
@@ -84,10 +84,6 @@ class AllowanceForm extends React.Component<Props, State> {
               <Text>user form</Text>
             </Button>
           </Form>
-          <Text>userId: {this.state.userId}</Text>
-          <Text>title: {this.state.title}</Text>
-          <Text>amount: {this.state.amount}</Text>
-          <Text>memo: {this.state.memo}</Text>
         </Content>
       </Container>
     )
@@ -124,6 +120,13 @@ class AllowanceForm extends React.Component<Props, State> {
     this.props.addAllowance({ id: newId, userId, title, amount, memo, isDone: false });
     this.props.addMonthAllowance({id: monthId, allowance: newId});
   }
+
+  _changePicker(value: string): void {
+    console.log("value", value)
+
+    this.setState({ userId: parseInt(value) })
+
+  };
 }
 
 
@@ -131,7 +134,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     allowanceId: state.allowance.ids,
     
-    ...state.users,
+    users: state.users,
     ...ownProps,
   }
 }
