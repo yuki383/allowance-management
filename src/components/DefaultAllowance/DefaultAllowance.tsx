@@ -2,47 +2,42 @@ import * as React from "react"
 import RecipientItem from "../RecipientsScreen/RecipientItem";
 import { Text, Icon, Grid, ActionSheet, Container, Content, View } from "native-base";
 import { NavigationScreenProp } from "react-navigation";
-import { NavigationOptions, Allowance, AllowanceState } from "../../constants/types";
+import { NavigationOptions, Allowance, AllowanceState, User } from "../../constants/types";
 import { Payload, } from "../../actions/DefaultActions";
-import { getAllowance } from "../../models";
+import { getAllowance, groupAllowanceByUserId } from "../../models";
 import { connect } from "react-redux";
 
 interface Props {
   navigation: NavigationScreenProp<any>;
-  allowanceState: AllowanceState;
+  defaults: AllowanceState;
+  users: User;
 }
 
 class DefaultAllowance extends React.Component<Props> {
 
   componentDidMount() {
-    this.props.navigation.setParams({ actionSheet: this._openActionSheet })
   }
 
   render() {
-    const { navigation, allowanceState } = this.props;
-    const itemList: Allowance[] = getAllowance(allowanceState);
+    const { navigation, defaults, users, } = this.props;
+    const itemList: Allowance[] = getAllowance(defaults);
+    console.log(users)
+    const { Ids, ByIds} = users;
+    const grouped = groupAllowanceByUserId(itemList, Ids);
+    const items = Ids.map(id => {
+      const name = ByIds[id].name;
+      const allowances = grouped[id];
+      return <RecipientItem key={id} name={name} allowances={allowances} navigation={navigation} />
+    })
 
     return(
       <Container>
         <Content>
           <View>
-            <RecipientItem name="hoge" allowances={itemList} navigation={navigation} />
+          {items}
           </View>
         </Content>
       </Container>
-    )
-  }
-
-  _openActionSheet() {
-    const buttons = ["User", "Allowance", "Cancel"];
-    const cancelIndex = 2;
-    ActionSheet.show(
-      {
-        options: buttons,
-        cancelButtonIndex: cancelIndex,
-        title: "action",
-      },
-      buttonIndex => {}
     )
   }
 
@@ -50,7 +45,8 @@ class DefaultAllowance extends React.Component<Props> {
 
 const mapStateToProps = (state) => {
   return {
-    allowanceState: state.defaultAllowance,
+    defaults: state.defaultAllowance,
+    users: state.users,
   }
 }
 

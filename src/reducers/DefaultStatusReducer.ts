@@ -1,26 +1,18 @@
 import { createReducer } from "redux-starter-kit";
-import {ActionType, User, Allowances, Allowance } from "../constants/types";
+import {ActionType, User, Allowances, Allowance, AllowanceState, AllowanceAction } from "../constants/types";
 import {
   addDefaultAllowance,
   updateDefaultAllowance,
   deleteDefaultAllowance,
   Payload,
 } from "../actions/DefaultActions";
-import { isDebuggerStatement } from "@babel/types";
 
-export interface State {
-  allowances: {
-    [id: number]: Allowance;
-  }
-  ids: number[];
-}
-
-const initialState: State = {
+const initialState: AllowanceState = {
   allowances: {},
   ids: []
 }
 
-const initialMock: State = {
+const initialMock: AllowanceState = {
   allowances: {
     0: {
       id: 0,
@@ -34,11 +26,9 @@ const initialMock: State = {
   ids: [0]
 }
 
-type Action = ActionType<Payload>
-
 export const DefaultStatusReducer = createReducer(initialMock, {
 
-  [addDefaultAllowance.type]: (state: State, action: Action) => {
+  [addDefaultAllowance.type]: (state: AllowanceState, action: AllowanceAction) => {
     const { ids } = state;
     const id = ids.length > 0 ? ids[ids.length - 1] + 1 : 0;
     const newAllowance: Allowance = {
@@ -50,7 +40,7 @@ export const DefaultStatusReducer = createReducer(initialMock, {
     state.ids.push(id);
   },
 
-  [updateDefaultAllowance.type]: (state: State, action: Action) => {
+  [updateDefaultAllowance.type]: (state: AllowanceState, action: AllowanceAction) => {
     const { id } = action.payload;
     state.allowances[id] = {
       ...state.allowances[id],
@@ -58,7 +48,7 @@ export const DefaultStatusReducer = createReducer(initialMock, {
     }
   },
 
-  [deleteDefaultAllowance.type]: (state: State, action: Action) => {
+  [deleteDefaultAllowance.type]: (state: AllowanceState, action: AllowanceAction) => {
     const { id } = action.payload;
     const { allowances, ids } = state;
     const index = ids.indexOf(id);
