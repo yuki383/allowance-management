@@ -21,6 +21,20 @@ export interface AllowanceState {
 
 export type AllowanceAction = ActionType<Allowance>
 
+export interface AllowanceInputs {
+  title?: string;
+  amount?: string;
+  memo?: string;
+}
+
+export interface AllowanceFormState extends AllowanceInputs {
+  userId: number;
+}
+
+export type AllowanceFormAction = ActionType<AllowanceFormState>;
+
+
+
 // ドメイン
 export interface User {
   ByIds: {

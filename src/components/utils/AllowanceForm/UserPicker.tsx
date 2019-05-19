@@ -6,12 +6,12 @@ import { getUser } from "../../../models";
 interface Props {
   users: User;
   selectedValue: number;
-  handleChangeValue: (value: string) => void;
+  handleChangePicker: (input: string) => void;
 }
 
 export default class UserPicker extends React.Component<Props> {
   render() {
-    const { users, handleChangeValue, selectedValue } = this.props;
+    const { users, handleChangePicker, selectedValue } = this.props;
     const usersList = getUser(users);
     const pickerItems = usersList.map(user => {
       const { id, name } = user;
@@ -23,7 +23,7 @@ export default class UserPicker extends React.Component<Props> {
         mode="dropdown"
         iosIcon={<Icon name="arrow-down" />}
         selectedValue={selectedValue}
-        onValueChange={itemValue => handleChangeValue(itemValue)}
+        onValueChange={itemValue => handleChangePicker(itemValue)}
       >
       {pickerItems}
       </Picker>
