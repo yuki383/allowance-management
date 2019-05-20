@@ -19,7 +19,7 @@ export default class AllowanceCard extends React.Component<Props> {
     return(
       <View style={{ paddingRight: 5, paddingLeft: 5}}>
         <Button style={{ flex: 1, height: 140, minWidth: 150, maxWidth: 300, backgroundColor: "#000080" }}
-          onPress={() => this.props.navigation.navigate("AllowancePropertyModal", { allowance: this.props.allowance })} 
+          onPress={() => this.props.navigation.navigate("AllowancePropertyModal", { allowanceId: this.props.allowance.id })} 
         >
           <View style={{ padding: 5}}>
             <Text style={styles.ButtonText}>{title}</Text>

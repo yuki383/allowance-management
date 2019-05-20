@@ -1,6 +1,6 @@
 import { createReducer } from "redux-starter-kit";
-import { AllowanceState, AllowanceAction, Allowances, Allowance} from "../constants/types";
-import { addAllowance, updateAllowance, deleteAllowance } from "../actions/AllowanceActions";
+import { AllowanceState, AllowanceAction, Allowances, Allowance, ActionType} from "../constants/types";
+import { addAllowance, updateAllowance, deleteAllowance, doneAllowance } from "../actions/AllowanceActions";
 import { updateDefaultAllowance } from "../actions/DefaultActions";
 
 
@@ -27,6 +27,12 @@ export const allowanceReducer = createReducer(initialState, {
       ...state.allowances[id],
       ...action.payload,
     }
+  },
+
+  [doneAllowance.type]: (state: AllowanceState, action: ActionType<{id: number}>) => {
+    console.log("action", action)
+    const allowance = state.allowances[action.payload.id];
+    allowance.isDone = !allowance.isDone;
   },
 
   [deleteAllowance.type]: (state: AllowanceState, action: AllowanceAction) => {
