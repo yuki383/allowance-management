@@ -19,11 +19,13 @@ const initialMock: User = {
 
 export const usersReducer = createReducer(initialMock, {
   [addUser.type]: (state: User, action: ActionType<{name: string}>) => {
-    const id = state.Ids.length;
+    const { Ids } = state;
+    const id = Ids.length > 0 ? Ids[Ids.length - 1] + 1 : 0;
     state.ByIds[id] = {
       id,
       name: action.payload.name,
     };
+    state.Ids.push(id);
   },
   [deleteUser.type]: (state: User, action: ActionType<{id: number}>) => {
     delete state.ByIds[action.payload.id];

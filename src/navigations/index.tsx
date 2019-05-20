@@ -7,6 +7,7 @@ import RecipientsScreen from "../components/RecipientsScreen/RecipientsScreen";
 import DefaultAllowance from "../components/DefaultAllowance/DefaultAllowance";
 import AllowanceForm from "../components/utils/AllowanceForm";
 import ModalHeader from "../components/utils/ModalHeader";
+import UserForm from "../components/utils/UserForm";
 
 import { NavigationOptions } from "../constants/types";
 import { Modal } from "react-native";
@@ -63,6 +64,9 @@ const Forms = createMaterialTopTabNavigator({
     AllowanceForm: {
       screen: AllowanceForm,
     },
+    UserForm: {
+      screen: UserForm,
+    }
   },
   {
     navigationOptions: ({ navigation }) => ({

@@ -32,9 +32,9 @@ class Recipients extends React.Component<Props> {
     })
 
     return(
-      <Grid>
+      <View>
       {recipientItems}
-      </Grid>
+      </View>
     )
 
   }

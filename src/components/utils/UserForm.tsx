@@ -26,9 +26,7 @@ class UserForm extends React.Component<Props, State> {
 
   render() {
     return(
-      <View>
         <Container>
-          <ModalHeader navigation={this.props.navigation} />
           <Content>
             <Form>
               <Item stackedLabel>
@@ -36,14 +34,13 @@ class UserForm extends React.Component<Props, State> {
                 <Input onChangeText={name => this.setState({ name })} />
               </Item>
               <Button
-                onPress={() => {}}
+                onPress={() => this._addUser()}
               >
                 <Text>Create</Text>
               </Button>
             </Form>
           </Content>
         </Container>
-      </View>
     )
   }
 
