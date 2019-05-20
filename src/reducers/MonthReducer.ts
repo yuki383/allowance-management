@@ -1,6 +1,6 @@
 import { createReducer, Action } from "redux-starter-kit";
 import { Month, ActionType } from "../constants/types";
-import { createMonthList, deleteMonthList, addMonthAllowance, Payload, } from "../actions/MonthListActions";
+import { createMonthList, deleteMonthList, addMonthAllowance, Payload, deleteMonthAllowance, } from "../actions/MonthListActions";
 
 export interface State {
   monthList: Month;
@@ -36,5 +36,14 @@ export const MonthReducer = createReducer(initialState, {
     arr.push(allowance)
     console.log(arr)
     state.monthList[id].allowances.push(allowance);
-  } 
+  },
+
+  [deleteMonthAllowance.type]: (state: State, action: ActionType<{monthId: number, allowanceId: number}>) => {
+    const { monthList } = state;
+    const { monthId, allowanceId } = action.payload;
+    const allowances = monthList[monthId].allowances;
+    const index = allowances.indexOf(allowanceId);
+    allowances.splice(index, 1);
+  }
+
 });

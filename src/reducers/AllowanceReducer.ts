@@ -1,7 +1,8 @@
-import { createReducer } from "redux-starter-kit";
+import { createReducer, Action } from "redux-starter-kit";
 import { AllowanceState, AllowanceAction, Allowances, Allowance, ActionType} from "../constants/types";
 import { addAllowance, updateAllowance, deleteAllowance, doneAllowance } from "../actions/AllowanceActions";
 import { updateDefaultAllowance } from "../actions/DefaultActions";
+import { deleteMonthAllowance } from "../actions/MonthListActions";
 
 
 const initialState: AllowanceState = {
@@ -35,12 +36,13 @@ export const allowanceReducer = createReducer(initialState, {
     allowance.isDone = !allowance.isDone;
   },
 
-  [deleteAllowance.type]: (state: AllowanceState, action: AllowanceAction) => {
+  [deleteAllowance.type]: (state: AllowanceState, action: ActionType<{id: number}>) => {
     const { id } = action.payload;
     const { allowances, ids } = state;
     const index = ids.indexOf(id);
     delete allowances[id];
-    ids.splice(index, 1)
-  }
+    ids.splice(index, 1);
+  },
+
 
 })

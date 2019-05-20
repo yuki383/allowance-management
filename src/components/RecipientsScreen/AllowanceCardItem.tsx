@@ -15,11 +15,16 @@ interface Props {
 
 export default class AllowanceCard extends React.Component<Props> {
   render() {
-    const { title, amount } = this.props.allowance;
+    const { allowance, navigation } = this.props;
+    const { title, amount } = allowance;
     return(
       <View style={{ paddingRight: 5, paddingLeft: 5}}>
         <Button style={{ flex: 1, height: 140, minWidth: 150, maxWidth: 300, backgroundColor: "#000080" }}
-          onPress={() => this.props.navigation.navigate("AllowancePropertyModal", { allowanceId: this.props.allowance.id })} 
+          onPress={() =>
+            navigation.navigate("AllowancePropertyModal", {
+              allowanceId: this.props.allowance.id,
+              monthId: navigation.getParam("monthId")
+          })} 
         >
           <View style={{ padding: 5}}>
             <Text style={styles.ButtonText}>{title}</Text>
