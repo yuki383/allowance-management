@@ -16,10 +16,11 @@ interface Props {
 export default class AllowanceCard extends React.Component<Props> {
   render() {
     const { allowance, navigation } = this.props;
-    const { title, amount } = allowance;
+    const { title, amount, isDone } = allowance;
+    const cardStyle = isDone ? styles.CompletedButton : styles.NotCompletedButton;
     return(
       <View style={{ paddingRight: 5, paddingLeft: 5}}>
-        <Button style={{ flex: 1, height: 140, minWidth: 150, maxWidth: 300, backgroundColor: "#000080" }}
+        <Button style={cardStyle}
           onPress={() =>
             navigation.navigate("AllowancePropertyModal", {
               allowanceId: this.props.allowance.id,
@@ -43,5 +44,20 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     flex: 1
 
+  },
+  CompletedButton: {
+    backgroundColor: "gray",
+    flex: 1,
+    height: 140,
+    minWidth: 150,
+    maxWidth: 300,
+
+  },
+  NotCompletedButton: {
+    backgroundColor: "#000080",
+    flex: 1,
+    height: 140,
+    minWidth: 150,
+    maxWidth: 300
   }
 })
