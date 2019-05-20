@@ -11,6 +11,7 @@ import UserForm from "../components/utils/UserForm";
 
 import { NavigationOptions } from "../constants/types";
 import { Modal } from "react-native";
+import { FormTabNavigation } from "../components/utils/FormTabNavigation";
 
 const MainStack = createStackNavigator(
   {
@@ -39,7 +40,7 @@ const MainStack = createStackNavigator(
           type="AntDesign"
           name="plus"
           style={{padding:10}}
-          onPress={() => navigation.navigate("AllowanceForm", { mode: "allowance", monthId})}
+          onPress={() => navigation.navigate("Forms", { mode: "allowance", monthId})}
         />
       }}
     },
@@ -52,7 +53,7 @@ const MainStack = createStackNavigator(
             type="AntDesign"
             style={{ padding: 10 }}
             name="plus"
-            onPress={() => navigation.navigate("AllowanceForm", { mode: "default"})}
+            onPress={() => navigation.navigate("Forms", { mode: "default"})}
           />
         ),
       })
@@ -71,7 +72,11 @@ const Forms = createMaterialTopTabNavigator({
   {
     navigationOptions: ({ navigation }) => ({
       header: <ModalHeader navigation={navigation} />
-    })
+    }),
+    tabBarOptions: {
+      tabStyle: {backgroundColor: "#EEEEEE"},
+      activeTintColor: "gray"
+    }
   }
 )
 
@@ -81,6 +86,7 @@ const WrapedForm = createStackNavigator({
   },
 },
 )
+
 
 const WrapedProperty = createStackNavigator({
   AllowancePropertyModal: {
@@ -101,7 +107,7 @@ export const RootStack = createStackNavigator(
       screen: WrapedProperty,
     },
     Forms: {
-      screen: WrapedForm,
+      screen: FormTabNavigation,
     }
   },
   {

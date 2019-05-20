@@ -11,10 +11,12 @@ const styles = StyleSheet.create({
 
 interface Props {
   navigation: NavigationScreenProp<any>
+  hasTabs?: boolean
 }
 
 export default class ModalHeader extends React.Component<Props> {
   render() {
+    const { hasTabs } = this.props;
     return(
         <Header>
           <Left>
