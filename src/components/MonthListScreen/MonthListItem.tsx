@@ -2,37 +2,39 @@ import * as React from "react";
 import { View, Text, ListItem, Left, Right, Icon,  } from "native-base";
 import { StyleSheet, Alert } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
-import { Allowance, Month } from "../../constants/types";
+import { Allowance, Month, AllowanceState } from "../../constants/types";
 import { connect } from "react-redux";
+import { getAllowance } from "../../models";
 
 interface Props {
-    id: number;
     month: {
       id: number;
       date: string;
       allowances: number[];
     }
-  navigation: NavigationScreenProp<any, any>
+    allowanceState: AllowanceState;
+  navigation: NavigationScreenProp<any, any>;
 }
 class MonthListItem extends React.Component<Props> {
   render() {
-    const { navigation, month } = this.props;
+    const { navigation, month, allowanceState } = this.props;
     const { id, date, allowances } = month;
-    // TODO Recipientsを実装したらRightのアイコンのいろをisDoneに合わせて変更できるようにする
+    const allowanceList = getAllowance(allowanceState).filter(allowance => allowances.some(n => n === allowance.id));
+    const isCompletedOfAll = allowanceList.every(allowance => allowance.isDone);
+    const checkColor = isCompletedOfAll ? "#00CC33" : "gray";
     return(
       <ListItem
         onPress={() => 
           navigation.navigate("Recipients", {
             title: date,
             monthId: id,
-            allowances,
           })}
       >
         <Left>
           <Text>{date}</Text>
         </Left>
         <Right>
-          <Icon type="AntDesign" name="check" style={{  }} />
+          <Icon type="AntDesign" name="check" style={{ color: checkColor }} />
         </Right>
       </ListItem>
     ) 
@@ -45,6 +47,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state, ownProps) => {
   return {
     ...state.recipients,
+    allowanceState: state.allowance,
     ...ownProps,
   }
 }
