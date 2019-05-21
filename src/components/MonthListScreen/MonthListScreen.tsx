@@ -14,15 +14,15 @@ import MonthList from "./MonthList";
 import { connect } from "react-redux";
 import { createMonthList } from "../../actions/MonthListActions";
 import { State as MonthState } from "../../reducers/MonthReducer";
-import { State as DefaultState } from "../../reducers/DefaultStatusReducer";
+
 import { getAllowance } from "../../models";
 import { addAllowance } from "../../actions/AllowanceActions";
-import { Allowance } from "../../constants/types";
+import { Allowance, AllowanceState } from "../../constants/types";
 
 interface Props {
   navigation: NavigationScreenProp<any, any>;
   monthListState: MonthState;
-  defaultState: DefaultState;
+  defaultState: AllowanceState;
   allowanceId: number[];
   ids: number[];
   createMonthList: ({ date: string, allowance: number }) => void;
@@ -56,7 +56,6 @@ class AllowanceListScreen extends React.Component<Props> {
     if (ids.length === 0) {
       this._createAllowance(defaults)
       .then(allowances => {
-        console.log("allowance",allowances)
         createMonthList({ date: this._getMonth(0), allowance: allowances });
       });
     } else if (!ids.some(id => monthList[id].date === nextMonth)) {

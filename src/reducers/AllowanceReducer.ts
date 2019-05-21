@@ -43,6 +43,4 @@ export const allowanceReducer = createReducer(initialState, {
     delete allowances[id];
     ids.splice(index, 1);
   },
-
-
-})
+});

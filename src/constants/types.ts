@@ -63,6 +63,7 @@ export interface Allowance {
   id: number;
   userId: number;
   isDone: boolean;
+  tags?: "hobby" | "transport" | "food";
   title: string;
   amount: string;
   memo: string;

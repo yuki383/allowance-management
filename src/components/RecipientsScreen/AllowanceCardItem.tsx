@@ -13,11 +13,12 @@ interface Props {
   navigation: NavigationScreenProp<any>;
 }
 
+// TODO タグによってデザインを変える
 export default class AllowanceCard extends React.Component<Props> {
   render() {
     const { allowance, navigation } = this.props;
     const { title, amount, isDone } = allowance;
-    const cardStyle = isDone ? styles.CompletedButton : styles.NotCompletedButton;
+    const cardStyle = isDone ? styles.CompletedButton : this._chooseButtonStyle();
     return(
       <View style={{ paddingRight: 5, paddingLeft: 5}}>
         <Button style={cardStyle}
@@ -34,6 +35,18 @@ export default class AllowanceCard extends React.Component<Props> {
         </Button>
       </View>
     )
+  }
+
+  _chooseButtonStyle() {
+    const { tags } = this.props.allowance;
+    if( tags === "hobby")
+      return styles.HobbyButton;
+    else if (tags === "food")
+      return styles.FoodButton;
+    else if (tags === "transport")
+      return styles.TransportationButton;
+    else
+      return styles.DefaultButton;
   }
 }
 
@@ -53,11 +66,24 @@ const styles = StyleSheet.create({
     maxWidth: 300,
 
   },
-  NotCompletedButton: {
-    backgroundColor: "#000080",
+  DefaultButton: {
+    backgroundColor: "#483d8b",
     flex: 1,
     height: 140,
     minWidth: 150,
     maxWidth: 300
+  },
+  HobbyButton: {
+    backgroundColor: "#CAB783",
+    flex: 1,
+    height: 140,
+    minWidth: 150,
+    maxWidth: 300
+  },
+  TransportationButton: {
+
+  },
+  FoodButton: {
+
   }
 })
