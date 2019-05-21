@@ -30,7 +30,6 @@ export const groupAllowanceByUserId: (allowances: Allowance[], userId: number[])
     }
   }
   const container: groupedAllowance = userId.reduce(makeAllowanceContainer, {});
-  console.log("container", container)
   return group(container, allowances.length);
 
 }

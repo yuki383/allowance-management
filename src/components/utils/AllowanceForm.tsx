@@ -60,11 +60,11 @@ class AllowanceForm extends React.Component<Props> {
   }
 
   _pressSubmitButton() {
-    const { inputs, navigation, inputAllowanceState } = this.props;
+    const { inputs, navigation, inputAllowanceState, users } = this.props;
     const { userId, title, amount, memo } = inputs;
     const mode = navigation.getParam("mode");
 
-    if(title && amount) {
+    if(title && amount && users.Ids.length) {
       switch(mode) {
         case "default":
           this._addDefaultAllowance();
