@@ -7,13 +7,13 @@ import RecipientItem from "./RecipientItem";
 import { AllowanceState, User, Month } from "../../constants/types";
 import { connect } from "react-redux";
 import { getAllowance, groupAllowanceByUserId,} from "../../models";
+
 interface Props {
   navigation: NavigationScreenProp<any>;
   monthList: Month;
   usersState: User;
   allowanceState: AllowanceState;
 }
-
 
 class Recipients extends React.Component<Props> {
 
@@ -32,7 +32,7 @@ class Recipients extends React.Component<Props> {
     })
 
     return(
-      <View>
+      <View >
       {recipientItems}
       </View>
     )

@@ -6,12 +6,19 @@ import { NavigationOptions, Allowance, AllowanceState, User } from "../../consta
 import { Payload, } from "../../actions/DefaultActions";
 import { getAllowance, groupAllowanceByUserId } from "../../models";
 import { connect } from "react-redux";
+import { StyleSheet } from "react-native";
 
 interface Props {
   navigation: NavigationScreenProp<any>;
   defaults: AllowanceState;
   users: User;
 }
+
+const styles = StyleSheet.create({
+  ViewStyle: {
+    backgroundColor: "#f3f3f3"
+  }
+})
 
 class DefaultAllowance extends React.Component<Props> {
 
@@ -33,7 +40,7 @@ class DefaultAllowance extends React.Component<Props> {
 
     return(
       <Container>
-        <Content>
+        <Content style={styles.ViewStyle}>
           <View>
           {items}
           </View>
