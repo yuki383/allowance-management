@@ -7,12 +7,13 @@ import { addMonthAllowance } from "../../actions/MonthListActions";
 import { inputAllowanceState } from "../../actions/FormStateActions";
 import { NavigationScreenProp } from "react-navigation";
 import ModalHeader from "./ModalHeader";
-import { Allowance, User, AllowanceFormState, AllowanceInputs } from "../../constants/types";
+import { Allowance, User, AllowanceFormState, AllowanceInputs, Tags } from "../../constants/types";
 import UserPicker from "./AllowanceForm/UserPicker";
 import AllowanceFormItems from "./AllowanceForm/AllowanceFormItems";
 
 interface Inputed {
   userId: number;
+  tags?: Tags;
   title: string;
   amount: string;
   memo: string;
@@ -46,7 +47,8 @@ class AllowanceForm extends React.Component<Props> {
           <AllowanceFormItems
             users={users}
             values={inputs}
-            handleChangePicker={input => this._changePicker(input)}
+            handleChangeUserPicker={input => this._changeUserPicker(input)}
+            handleChangeTagsPicker={input => this._changeTagsPicker(input)}
             handleChangeValue={input => this._changeValue(input)}
           />
           <Button
@@ -80,28 +82,36 @@ class AllowanceForm extends React.Component<Props> {
   }
 
   _addDefaultAllowance() {
-    const { userId, title, amount, memo } = this.props.inputs as Inputed;
+    const { userId, title, amount, memo, tags } = this.props.inputs as Inputed;
     const monthId = this.props.navigation.getParam("monthId");
-    this.props.addDefaultAllowance({ id: -1, userId, title, amount, memo, isDone: false });
+    this.props.addDefaultAllowance({ id: -1, userId, tags, title, amount, memo, isDone: false });
 
   }
 
   _addAllowaneOfMonth() {
     const { allowanceId, navigation, inputs } = this.props;
-    const { userId, title, amount, memo } = inputs as Inputed;
+    const { userId, title, amount, memo, tags } = inputs as Inputed;
     const newId = allowanceId.length > 0 ? allowanceId[allowanceId.length - 1] + 1 : 0;
     const monthId = navigation.getParam("monthId");
-    this.props.addAllowance({ id: newId, userId, title, amount, memo, isDone: false });
+    this.props.addAllowance({ id: newId, userId, tags, title, amount, memo, isDone: false });
     this.props.addMonthAllowance({id: monthId, allowance: newId});
   }
 
-  _changePicker(input: string): void {
+  _changeUserPicker(input: string): void {
     const { inputs, inputAllowanceState } = this.props;
     inputAllowanceState({
       ...inputs,
       userId: parseInt(input)
     });
   };
+
+  _changeTagsPicker(input?: Tags): void {
+    const { inputs, inputAllowanceState } = this.props;
+    inputAllowanceState({
+      ...inputs,
+      tags: input,
+    });
+  }
 
   _changeValue(input: AllowanceInputs) {
     const { inputs, inputAllowanceState } = this.props;

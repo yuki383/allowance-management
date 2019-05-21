@@ -3,6 +3,7 @@ import {
   Button,
   View,
   Text,
+  Icon,
 } from "native-base";
 import { NavigationScreenProp } from "react-navigation";
 import { StyleSheet } from "react-native";
@@ -31,6 +32,8 @@ export default class AllowanceCard extends React.Component<Props> {
           <View style={{ padding: 5}}>
             <Text style={styles.ButtonText}>{title}</Text>
             <Text style={styles.ButtonText}>{amount}</Text>
+            {/** TODO tagによるアイコンをつける */}
+            {}
           </View>
         </Button>
       </View>

@@ -23,6 +23,7 @@ export type AllowanceAction = ActionType<Allowance>
 
 export interface AllowanceInputs {
   title?: string;
+  tags?: Tags;
   amount?: string;
   memo?: string;
 }
@@ -59,11 +60,13 @@ export interface Allowances {
   [id: number]: Allowance;
 }
 
+export type Tags = "hobby" | "transport" | "food";
+
 export interface Allowance {
   id: number;
   userId: number;
   isDone: boolean;
-  tags?: "hobby" | "transport" | "food";
+  tags?: Tags;
   title: string;
   amount: string;
   memo: string;

@@ -1,29 +1,38 @@
 import * as React from "react";
 import { Form, Item, Label, Input } from "native-base";
 import UserPicker from "./UserPicker";
-import { User, AllowanceFormState, AllowanceInputs } from "../../../constants/types";
+import { User, AllowanceFormState, AllowanceInputs, Tags } from "../../../constants/types";
+import TagsPicker from "./TagsPicker";
 
 interface Props {
   users: User;
   values: AllowanceFormState;
   handleChangeValue: (input: AllowanceInputs) => void;
-  handleChangePicker: (input: string) => void; 
+  handleChangeUserPicker: (input: string) => void; 
+  handleChangeTagsPicker: (input?: Tags) => void;
 }
 
 export default class AllowanceFormItems extends React.Component<Props> {
 
   render() {
-    const { handleChangePicker, values, users, handleChangeValue } = this.props;
+    const { handleChangeUserPicker, handleChangeTagsPicker, values, users, handleChangeValue } = this.props;
     return(
       <Form>
         {/* Allowanceを追加するユーザーのピッカー */}
         <Item picker stackedLabel >
           <Label>User</Label>
           <UserPicker 
-            handleChangePicker={itemValue => handleChangePicker(itemValue)} 
+            handleChangePicker={itemValue => handleChangeUserPicker(itemValue)} 
             selectedValue={values.userId}
             users={users}
           />
+        </Item>
+        <Item picker stackedLabel >
+        <Label>Tags</Label>
+        <TagsPicker
+          selectedValue={values.tags}
+          handleChangePicker={itemValue => handleChangeTagsPicker(itemValue)}
+        />
         </Item>
         <Item stackedLabel>
           <Label>Title</Label>
