@@ -23,11 +23,12 @@ class DefaultAllowance extends React.Component<Props> {
     const itemList: Allowance[] = getAllowance(defaults);
     console.log(users)
     const { Ids, ByIds} = users;
-    const grouped = groupAllowanceByUserId(itemList, Ids);
-    const items = Ids.map(id => {
+    const grouped = Ids.length > 0 ? groupAllowanceByUserId(itemList, Ids) : {};
+    const items = Ids.map((id, index) => {
       const name = ByIds[id].name;
       const allowances = grouped[id];
-      return <RecipientItem key={id} name={name} allowances={allowances} navigation={navigation} />
+      if(index === 0) return <RecipientItem key={id} name={name} allowances={allowances} navigation={navigation} isTop={true} />
+      else return <RecipientItem key={id} name={name} allowances={allowances} navigation={navigation} />
     })
 
     return(

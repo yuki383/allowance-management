@@ -23,11 +23,12 @@ class Recipients extends React.Component<Props> {
     const AllowamceOfMonthId = monthList[monthId].allowances;
     const { Ids: idOfUser, ByIds: users} = usersState;
     const allowances = getAllowance(allowanceState).filter(allowance => AllowamceOfMonthId.some(n => n === allowance.id));
-    const grouped = groupAllowanceByUserId(allowances, idOfUser);
-    const recipientItems = idOfUser.map(id => {
+    const grouped = idOfUser.length > 0 ? groupAllowanceByUserId(allowances, idOfUser) : {};
+    const recipientItems = idOfUser.map((id, index) => {
       const name = users[id]["name"];
       const allowances = grouped[id];
-      return <RecipientItem key={id} name={name} allowances={allowances} navigation={navigation} />
+      if (index === 0) return <RecipientItem key={id} name={name} allowances={allowances} navigation={navigation} isTop={true} />
+      else return <RecipientItem key={id} name={name} allowances={allowances} navigation={navigation} />
     })
 
     return(
