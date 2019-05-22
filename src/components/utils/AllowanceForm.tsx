@@ -39,6 +39,7 @@ class AllowanceForm extends React.Component<Props> {
     // Userのドメインを作成したらマウント時にuserIdを降順一番上のユーザーのものにする
   }
 
+  // TODO 入力中にフォームを閉じた場合に値が残ったままになるバグの修正
   render() {
     const { users, inputs} = this.props;
     return (
@@ -75,7 +76,7 @@ class AllowanceForm extends React.Component<Props> {
           this._addAllowaneOfMonth();
           break;
       }
-      inputAllowanceState({ userId: 0, memo: "", title: undefined, amount: undefined});
+      inputAllowanceState({ userId: 0, tags: undefined, memo: "", title: undefined, amount: undefined});
       navigation.pop();
     }
     

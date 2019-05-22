@@ -44,7 +44,11 @@ export default class AllowanceFormItems extends React.Component<Props> {
         </Item>
         <Item stackedLabel >
           <Label>メモ</Label>
-          <Input onChangeText={memo => handleChangeValue({ memo })} />
+          <Input
+            multiline={true}
+            numberOfLines={4}
+            onChangeText={memo => handleChangeValue({ memo })}
+          />
         </Item>
       </Form>
     )
