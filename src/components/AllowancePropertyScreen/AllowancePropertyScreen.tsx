@@ -7,10 +7,12 @@ import { connect } from "react-redux";
 import { doneAllowance, deleteAllowance } from "../../actions/AllowanceActions";
 import { deleteMonthAllowance } from "../../actions/MonthListActions";
 import { StyleSheet } from "react-native";
+import DefaultAllowance from "../DefaultAllowance/DefaultAllowance";
 
 interface Props {
   navigation: NavigationScreenProp<any>
   allowances: Allowance[];
+  defaultAllowances: Allowance[];
   doneAllowance: ({ id: number }) => void;
   deleteAllowance: ({ id: number }) => void;
   deleteMonthAllowance: (payload: { monthId: number, allowanceId: number }) => void;
@@ -19,15 +21,17 @@ interface Props {
 class AllowancePropertyScreen extends React.Component<Props> {
 
   render() {
-    const { navigation, allowances } = this.props;
+    const { navigation, allowances, defaultAllowances } = this.props;
     const allowanceId = navigation.getParam("allowanceId");
-    if (allowances[allowanceId]) {
-      const { id, isDone, title, amount, memo, tags } = allowances[allowanceId];
+    const isDefualt = navigation.getParam("default");
+    const allowance = isDefualt ? defaultAllowances[allowanceId] : allowances[allowanceId];
+    if (allowance) {
+      const { id, isDone, title, amount, memo, tags } = allowance;
 
       return (
         <Container>
           <Content>
-            <View style={{ flex: 1, padding: 50 }}>
+            <View style={{ flex: 1, paddingLeft: 50, paddingRight: 50, paddingTop: 50 }}>
               <View>
                 <Text style={styles.Title} >{title}</Text>
                 <Text style={[styles.Common, { lineHeight: 40}]}>{amount}円</Text>
@@ -35,10 +39,10 @@ class AllowancePropertyScreen extends React.Component<Props> {
                 <Text style={styles.Common}>メモ：</Text>
                 <Text style={[styles.Memo, {paddingLeft: 10}]}>{memo}</Text>
               </View>
-              <View style={[{ flexDirection: "row"}]}>
+              <View style={[{ flexDirection: "row", paddingTop: "100%"}]}>
                 {this._doneToggleButton(isDone)}
                 <Button
-                  style={[styles.DeleteButton]}
+                  style={[styles.DeleteButton, styles.ButtonSize]}
                   onPress={() => this._deleteAllowance(id)}
                 >
                   <Text>削除</Text>
@@ -61,7 +65,7 @@ class AllowancePropertyScreen extends React.Component<Props> {
     const buttonText = isDone ? "未完了にする" : "完了にする";
     const buttonStyle = isDone ? styles.CompletedButton : styles.Button;
 
-    return <Button style={[buttonStyle]} onPress={() => doneAllowance({ id: allowanceId })} ><Text>{buttonText}</Text></Button>
+    return <Button style={[buttonStyle, styles.ButtonSize]} onPress={() => doneAllowance({ id: allowanceId })} ><Text>{buttonText}</Text></Button>
   }
 
   _selectTagOfDisplay(tags?: Tags) {
@@ -93,6 +97,7 @@ const styles = StyleSheet.create({
   Common: {
     fontSize: 20,
     lineHeight: 30,
+    paddingLeft: 5,
   },
   Memo: {
     fontSize: 18,
@@ -105,11 +110,15 @@ const styles = StyleSheet.create({
   },
   DeleteButton: {
     backgroundColor: "#d9534f"
+  },
+  ButtonSize: {
+    width: "45%",
   }
 })
 
 const mapStateToProps = (state) => ({
   allowances: state.allowance.allowances,
+  defaultAllowances: state.defaultAllowance.allowances
 })
 
 export default connect(

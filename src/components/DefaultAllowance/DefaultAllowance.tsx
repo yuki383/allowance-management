@@ -20,6 +20,8 @@ const styles = StyleSheet.create({
   }
 })
 
+// TODO デフォルトの時でもカードアイテムを押した時に通常の方のお小遣いのプロパティが表示されてしまう。
+
 class DefaultAllowance extends React.Component<Props> {
 
   componentDidMount() {
@@ -28,14 +30,13 @@ class DefaultAllowance extends React.Component<Props> {
   render() {
     const { navigation, defaults, users, } = this.props;
     const itemList: Allowance[] = getAllowance(defaults);
-    console.log(users)
     const { Ids, ByIds} = users;
     const grouped = Ids.length > 0 ? groupAllowanceByUserId(itemList, Ids) : {};
     const items = Ids.map((id, index) => {
       const name = ByIds[id].name;
       const allowances = grouped[id];
-      if(index === 0) return <RecipientItem key={id} name={name} allowances={allowances} navigation={navigation} isTop={true} />
-      else return <RecipientItem key={id} name={name} allowances={allowances} navigation={navigation} />
+      if(index === 0) return <RecipientItem key={id} name={name} allowances={allowances} isDefault={true} navigation={navigation} isTop={true} />
+      else return <RecipientItem key={id} name={name} allowances={allowances} isDefault={true} navigation={navigation} />
     })
 
     return(

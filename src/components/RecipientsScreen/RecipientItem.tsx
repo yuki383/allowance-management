@@ -8,6 +8,7 @@ import { Allowance } from "../../constants/types";
 
 interface Props {
   isTop?: boolean;
+  isDefault?: boolean;
   name: string;
   allowances: Allowance[];
   navigation: NavigationScreenProp<any>;
@@ -15,9 +16,9 @@ interface Props {
 export default class RecipientItem extends React.Component<Props> {
 
   render() {
-    const { name, allowances, navigation, isTop } = this.props;
+    const { name, allowances, navigation, isTop, isDefault } = this.props;
     const cards = allowances.map(allowance => {
-      return <AllowanceCardItem key={allowance.id} allowance={allowance} navigation={navigation} />
+      return <AllowanceCardItem key={allowance.id} allowance={allowance} isDefault={isDefault} navigation={navigation} />
     });
 
     return (

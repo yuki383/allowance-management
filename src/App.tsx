@@ -28,7 +28,7 @@ export default class App extends React.Component {
         <PersistGate loading={null} persistor={persistor} >
           <Root>
             <AppContainer />
-            <Button onPress={() => persistor.purge()} ><Text>purge </Text></Button>
+            { /* <Button onPress={() => persistor.purge()} ><Text>purge </Text></Button> */ }
           </Root>
         </PersistGate>
       </Provider>

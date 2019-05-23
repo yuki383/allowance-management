@@ -12,6 +12,7 @@ import { Allowance } from "../../constants/types";
 
 interface Props {
   allowance: Allowance
+  isDefault?: boolean;
   navigation: NavigationScreenProp<any>;
 }
 
@@ -30,7 +31,8 @@ export default class AllowanceCard extends React.Component<Props> {
           onPress={() =>
             navigation.navigate("AllowancePropertyModal", {
               allowanceId: this.props.allowance.id,
-              monthId: navigation.getParam("monthId")
+              monthId: navigation.getParam("monthId"),
+              isDefault: navigation.getParam("isDefault"),
           })} 
         >
           <View style={{ padding: 5, }}>
@@ -99,8 +101,8 @@ const styles = StyleSheet.create({
     maxWidth: 300
   },
   HobbyButton: {
-    backgroundColor: "#CAB783",
-    borderColor: "black",
+    backgroundColor: "#ffcc66",
+    borderColor: "#c5a05a",
     flex: 1,
     height: 140,
     minWidth: 150,
