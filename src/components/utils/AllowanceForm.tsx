@@ -1,14 +1,12 @@
 import * as React from "react";
-import { Container, Content, Form, Item, Header, Text, Input, Picker, Icon, Button, Label, Left, Body, Right, Title, ActionSheet } from "native-base";
+import { Container, Content, Text, Button } from "native-base";
 import { connect } from "react-redux";
-import { addDefaultAllowance, updateDefaultAllowance, deleteDefaultAllowance, Payload } from "../../actions/DefaultActions";
+import { addDefaultAllowance } from "../../actions/DefaultActions";
 import { addAllowance, } from "../../actions/AllowanceActions";
 import { addMonthAllowance } from "../../actions/MonthListActions";
 import { inputAllowanceState } from "../../actions/FormStateActions";
 import { NavigationScreenProp } from "react-navigation";
-import ModalHeader from "./ModalHeader";
 import { Allowance, User, AllowanceFormState, AllowanceInputs, Tags } from "../../constants/types";
-import UserPicker from "./AllowanceForm/UserPicker";
 import AllowanceFormItems from "./AllowanceForm/AllowanceFormItems";
 
 interface Inputed {
@@ -34,9 +32,7 @@ class AllowanceForm extends React.Component<Props> {
 
   componentDidMount() {
     const { navigation } = this.props;
-    const mode = navigation.getParam("mode");
-    const date = navigation.getParam("month");
-    // Userのドメインを作成したらマウント時にuserIdを降順一番上のユーザーのものにする
+   // Userのドメインを作成したらマウント時にuserIdを降順一番上のユーザーのものにする
   }
 
   // TODO 入力中にフォームを閉じた場合に値が残ったままになるバグの修正
@@ -53,6 +49,7 @@ class AllowanceForm extends React.Component<Props> {
             handleChangeValue={input => this._changeValue(input)}
           />
           <Button
+            style={{ padding: 10}}
             onPress={() => this._pressSubmitButton()}
           >
             <Text>submit</Text>

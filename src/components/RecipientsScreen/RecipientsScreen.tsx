@@ -1,11 +1,7 @@
 import * as React from "react";
-import { View, Text, Grid, Row, Col, Container, Content, Button, } from "native-base";
+import { Container, Content } from "native-base";
 import { NavigationScreenProp, } from "react-navigation";
 import Recipients from "./Recipients";
-
-import {
-  NavigationOptions,
-} from "../../constants/types";
 import { StyleSheet } from "react-native";
 
 interface Props {

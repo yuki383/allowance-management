@@ -1,13 +1,12 @@
 import * as React from "react";
-import { View, Text, Button, Icon, Container, Content, Header, Left } from "native-base";
-import { Allowance, NavigationOptions, Tags } from "../../constants/types";
+import { View, Text, Button, Container, Content } from "native-base";
+import { Allowance, Tags } from "../../constants/types";
 import { NavigationScreenProp } from "react-navigation";
-import ModalHeader from "../utils/ModalHeader";
 import { connect } from "react-redux";
 import { doneAllowance, deleteAllowance } from "../../actions/AllowanceActions";
 import { deleteMonthAllowance } from "../../actions/MonthListActions";
 import { StyleSheet } from "react-native";
-import DefaultAllowance from "../DefaultAllowance/DefaultAllowance";
+import { deleteDefaultAllowance } from "../../actions/DefaultActions";
 
 interface Props {
   navigation: NavigationScreenProp<any>
@@ -15,6 +14,7 @@ interface Props {
   defaultAllowances: Allowance[];
   doneAllowance: ({ id: number }) => void;
   deleteAllowance: ({ id: number }) => void;
+  deleteDefaultAllowance: ({ id: number }) => void;
   deleteMonthAllowance: (payload: { monthId: number, allowanceId: number }) => void;
 }
 
@@ -23,7 +23,7 @@ class AllowancePropertyScreen extends React.Component<Props> {
   render() {
     const { navigation, allowances, defaultAllowances } = this.props;
     const allowanceId = navigation.getParam("allowanceId");
-    const isDefualt = navigation.getParam("default");
+    const isDefualt = navigation.getParam("isDefault");
     const allowance = isDefualt ? defaultAllowances[allowanceId] : allowances[allowanceId];
     if (allowance) {
       const { id, isDone, title, amount, memo, tags } = allowance;
@@ -80,10 +80,15 @@ class AllowancePropertyScreen extends React.Component<Props> {
   }
 
   _deleteAllowance(allowanceId: number) {
-    const { deleteAllowance, deleteMonthAllowance, navigation } = this.props;
+    const { deleteAllowance, deleteDefaultAllowance, deleteMonthAllowance, navigation } = this.props;
+    const isDefault = navigation.getParam("isDefault");
     const monthId = navigation.getParam("monthId");
-    deleteAllowance({ id: allowanceId });
-    deleteMonthAllowance({ monthId, allowanceId });
+    if (!isDefault) {
+      deleteAllowance({ id: allowanceId });
+      deleteMonthAllowance({ monthId, allowanceId });
+    } else {
+      deleteDefaultAllowance({ id: allowanceId });
+    }
     navigation.popToTop();
   }
 
@@ -123,5 +128,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  { doneAllowance, deleteAllowance, deleteMonthAllowance }
+  { doneAllowance, deleteAllowance, deleteDefaultAllowance,  deleteMonthAllowance }
 )(AllowancePropertyScreen);

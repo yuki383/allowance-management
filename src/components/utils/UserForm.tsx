@@ -1,7 +1,5 @@
 import * as React from "react";
-import { View, Container, Content, Form, Item, Label, Input, Button, Text } from "native-base";
-import { Modal } from "react-native";
-import ModalHeader from "./ModalHeader";
+import { Container, Content, Form, Item, Label, Input, Button, Text } from "native-base";
 import { NavigationScreenProp } from "react-navigation";
 import { addUser } from "../../actions/UsersActions";
 import { connect } from "react-redux";

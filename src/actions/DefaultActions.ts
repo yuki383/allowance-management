@@ -1,5 +1,4 @@
 import { createAction } from "redux-starter-kit";
-import { User, Allowance } from "../constants/types";
 
 export interface Payload {
   id: number;

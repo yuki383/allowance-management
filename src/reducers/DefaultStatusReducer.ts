@@ -34,7 +34,7 @@ export const DefaultStatusReducer = createReducer(initialState, {
     }
   },
 
-  [deleteDefaultAllowance.type]: (state: AllowanceState, action: AllowanceAction) => {
+  [deleteDefaultAllowance.type]: (state: AllowanceState, action: ActionType<{ id: number }>) => {
     const { id } = action.payload;
     const { allowances, ids } = state;
     const index = ids.indexOf(id);

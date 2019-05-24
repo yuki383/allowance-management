@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Header, Left, Icon, Body, Title, Right } from "native-base";
+import { Header, Left, Icon, Body, Right } from "native-base";
 import { NavigationScreenProp } from "react-navigation";
 import { StyleSheet } from "react-native";
 

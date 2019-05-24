@@ -1,8 +1,6 @@
 import * as React from "react";
-import { View, Text, Row, Grid } from "native-base";
+import { View } from "native-base";
 import { NavigationScreenProp } from "react-navigation";
-import { StyleSheet } from "react-native";
-
 import RecipientItem from "./RecipientItem";
 import { AllowanceState, User, Month } from "../../constants/types";
 import { connect } from "react-redux";

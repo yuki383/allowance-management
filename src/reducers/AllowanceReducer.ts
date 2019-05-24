@@ -31,7 +31,6 @@ export const allowanceReducer = createReducer(initialState, {
   },
 
   [doneAllowance.type]: (state: AllowanceState, action: ActionType<{id: number}>) => {
-    console.log("action", action)
     const allowance = state.allowances[action.payload.id];
     allowance.isDone = !allowance.isDone;
   },

@@ -20,7 +20,7 @@ export default class AllowanceFormItems extends React.Component<Props> {
       <Form>
         {/* Allowanceを追加するユーザーのピッカー */}
         <Item picker stackedLabel >
-          <Label>User</Label>
+          <Label>ユーザー</Label>
           <UserPicker 
             handleChangePicker={itemValue => handleChangeUserPicker(itemValue)} 
             selectedValue={values.userId}
@@ -28,14 +28,14 @@ export default class AllowanceFormItems extends React.Component<Props> {
           />
         </Item>
         <Item picker stackedLabel >
-        <Label>Tags</Label>
+        <Label>タグ</Label>
         <TagsPicker
           selectedValue={values.tags}
           handleChangePicker={itemValue => handleChangeTagsPicker(itemValue)}
         />
         </Item>
         <Item stackedLabel>
-          <Label>Title</Label>
+          <Label>タイトル</Label>
           <Input onChangeText={title => handleChangeValue({ title })} />
         </Item>
         <Item stackedLabel >

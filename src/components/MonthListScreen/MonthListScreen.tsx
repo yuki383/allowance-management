@@ -1,20 +1,10 @@
 import * as React from "react";
-import { StyleSheet, } from "react-native";
-import {
-  View,
-  Text,
-  Container,
-  Content,
-  Icon,
-  Button,
-} from "native-base";
+import { Container, Content, } from "native-base";
 import { NavigationScreenProp } from "react-navigation";
-
 import MonthList from "./MonthList";
 import { connect } from "react-redux";
 import { createMonthList } from "../../actions/MonthListActions";
 import { State as MonthState } from "../../reducers/MonthReducer";
-
 import { getAllowance } from "../../models";
 import { addAllowance } from "../../actions/AllowanceActions";
 import { Allowance, AllowanceState } from "../../constants/types";

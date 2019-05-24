@@ -1,9 +1,8 @@
 import * as React from "react"
 import RecipientItem from "../RecipientsScreen/RecipientItem";
-import { Text, Icon, Grid, ActionSheet, Container, Content, View } from "native-base";
+import {Container, Content, View } from "native-base";
 import { NavigationScreenProp } from "react-navigation";
-import { NavigationOptions, Allowance, AllowanceState, User } from "../../constants/types";
-import { Payload, } from "../../actions/DefaultActions";
+import {Allowance, AllowanceState, User } from "../../constants/types";
 import { getAllowance, groupAllowanceByUserId } from "../../models";
 import { connect } from "react-redux";
 import { StyleSheet } from "react-native";

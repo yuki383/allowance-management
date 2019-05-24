@@ -1,11 +1,5 @@
 import * as React from "react";
-import {
-  Button,
-  View,
-  Text,
-  Icon,
-  Grid,
-} from "native-base";
+import { Button, View, Text, Icon, } from "native-base";
 import { NavigationScreenProp } from "react-navigation";
 import { StyleSheet } from "react-native";
 import { Allowance } from "../../constants/types";
@@ -19,7 +13,7 @@ interface Props {
 // TODO タグによってデザインを変える
 export default class AllowanceCard extends React.Component<Props> {
   render() {
-    const { allowance, navigation } = this.props;
+    const { allowance, navigation, isDefault } = this.props;
     const { title, amount, isDone } = allowance;
     const cardStyle = isDone ? styles.CompletedButton : this._chooseButtonStyle();
     const textStyle = isDone ? styles.CompletedText : styles.Text;
@@ -32,7 +26,7 @@ export default class AllowanceCard extends React.Component<Props> {
             navigation.navigate("AllowancePropertyModal", {
               allowanceId: this.props.allowance.id,
               monthId: navigation.getParam("monthId"),
-              isDefault: navigation.getParam("isDefault"),
+              isDefault: isDefault, 
           })} 
         >
           <View style={{ padding: 5, }}>

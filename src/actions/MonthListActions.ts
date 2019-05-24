@@ -1,5 +1,4 @@
 import { createAction, PayloadActionCreator } from "redux-starter-kit";
-import { ActionType } from "../constants/types";
 
 export const createMonthList = createAction("monthList/create");
 export const deleteMonthList = createAction("monthList/delete");

@@ -1,8 +1,7 @@
 import * as React from "react";
-import { StyleSheet, ScrollViewBase, ScrollView } from "react-native";
-import { View, Text, Row, Grid } from "native-base";
+import { StyleSheet, ScrollView } from "react-native";
+import { Text, Row, Grid } from "native-base";
 import { NavigationScreenProp } from "react-navigation";
-
 import AllowanceCardItem from "./AllowanceCardItem";
 import { Allowance } from "../../constants/types";
 

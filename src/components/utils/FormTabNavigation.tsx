@@ -1,9 +1,8 @@
 import * as React from "react";
 import { NavigationScreenProp, NavigationState } from "react-navigation";
-import { View, Tabs, Tab, Container, Header, Left, Icon, Body, Right } from "native-base";
+import { Tabs, Tab, Container, Header, Left, Icon, Body, Right } from "native-base";
 import AllowanceForm from "./AllowanceForm";
 import UserForm from "./UserForm";
-import ModalHeader from "./ModalHeader";
 import { StyleSheet } from "react-native";
 
 

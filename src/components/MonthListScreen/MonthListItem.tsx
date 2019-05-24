@@ -1,8 +1,8 @@
 import * as React from "react";
-import { View, Text, ListItem, Left, Right, Icon,  } from "native-base";
-import { StyleSheet, Alert } from "react-native";
+import { Text, ListItem, Left, Right, Icon,  } from "native-base";
+import { StyleSheet, } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
-import { Allowance, Month, AllowanceState } from "../../constants/types";
+import { AllowanceState } from "../../constants/types";
 import { connect } from "react-redux";
 import { getAllowance } from "../../models";
 

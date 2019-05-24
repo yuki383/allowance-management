@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, List, ListItem, } from "native-base";
+import {List } from "native-base";
 import { NavigationScreenProp } from "react-navigation";
 
 import MonthListItem from "./MonthListItem";
